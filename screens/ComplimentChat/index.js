@@ -5,15 +5,47 @@ import API from '../../utils/API';
 
 import logo from '../../assets/images/check/check1.png';
 
-export default class Chat extends React.Component {
+export default class ComplimentChat extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+  }
+    state = {
       //Set initial state for when chat is first started
+      messages: [],
+    };
+        // {
+        //   _id: 1,
+        //   text: 'Everything would be better if more people were like you!',
+        //   createdAt: new Date(),
+        //   user: {
+        //     _id: 2,
+        //     name: 'Upsy',
+        //     avatar: logo,
+        //   },
+        // },
+      
+  
+  // static navigationOptions = ({navigation}) => {
+  //   return {
+  //     title: 'Upsy Love',
+
+  //     headerStyle: {
+  //       backgroundColor: '#6bccf3',
+  //     },
+  //     headerTintColor: '#fff',
+  //     headerTitleStyle: {
+  //       fontWeight: 'bold',
+  //     },
+  //   };
+  // };
+
+  // replicated from regular chat
+  componentDidMount() {
+    this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Everything would be better if more people were like you!',
+          text: "is the compliment working?",
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -22,21 +54,8 @@ export default class Chat extends React.Component {
           },
         },
       ],
-    };
+    });
   }
-  static navigationOptions = ({navigation}) => {
-    return {
-      title: 'Upsy Love',
-
-      headerStyle: {
-        backgroundColor: '#6bccf3',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    };
-  };
 
   //Get a response from upsy using the upself web API
   getUpsyCompliment = () => {

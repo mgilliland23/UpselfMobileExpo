@@ -164,7 +164,7 @@ export default class Menu extends Component {
               }}>
               <View>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('')}>
+                  onPress={() => this.props.navigation.navigate('ComplimentChat')}>
                   <Image
                     style={styles.upsyImg}
                     source={require('../../assets/images/menu_icons/compliments.png')}

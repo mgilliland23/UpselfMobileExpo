@@ -73,6 +73,18 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <Icon name="brain" size={22} color="#fff" />
       }
     },
+
+    Compliment: {
+      screen: Compliment,
+
+      navigationOptions: {
+        tabBarLabel: "Compliment",
+        tabBarColor: "#FF5733",
+        activeColor: "#fff",
+        tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+      }
+    },
+
     CalmCloud: CalmCloudNavigator,
 
     Menu: {
@@ -86,10 +98,6 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <EnIcon name="menu" size={22} color="#fff" />
       }
     }
-
-    // Compliment: {
-    //   screen: Compliment,
-    // },
   },
   {
     //Render the splash screen on app load, which redirects to menu after 2 seconds
