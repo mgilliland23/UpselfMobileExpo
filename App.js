@@ -12,7 +12,7 @@ import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
 import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
-import Compliment from "./screens/ComplimentChat";
+import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -75,7 +75,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
     },
 
     Compliment: {
-      screen: Compliment,
+      screen: ComplimentChat,
 
       navigationOptions: {
         tabBarLabel: "Compliment",
