@@ -7,10 +7,10 @@
  */
 
 import React, { Fragment, Component } from "react";
-import Landing from "./screens/Landing";
 import Chat from "./screens/Chat";
 import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
+import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
 import Compliment from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
@@ -24,6 +24,27 @@ import EnIcon from "react-native-vector-icons/Entypo";
 
 //Disable the yellow warning boxes in the emulator
 console.disableYellowBox = true;
+
+const CalmCloudNavigator = createStackNavigator(
+  {
+    StressInputPage: {
+      screen: StressInputPage
+    },
+    CalmCloud: {
+      screen: CalmCloud
+    }
+  },
+  {
+    headerMode: "none",
+    initialRouteName: "StressInputPage",
+    navigationOptions: {
+      tabBarLabel: "Calm Cloud",
+      tabBarColor: "#936df4",
+      activeColor: "#fff",
+      tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+    }
+  }
+);
 
 //Set up routes and the navigator for the app
 const BottomBarNavigator = createMaterialBottomTabNavigator(
@@ -42,16 +63,6 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <EnIcon name="chat" size={22} color="#fff" />
       }
     },
-    CalmCloud: {
-      screen: CalmCloud,
-
-      navigationOptions: {
-        tabBarLabel: "Calm Cloud",
-        tabBarColor: "#6d8bf4",
-        activeColor: "#fff",
-        tabBarIcon: <EnIcon name="cloud" size={22} color="#fff" />
-      }
-    },
     Memory: {
       screen: Memory,
 
@@ -62,6 +73,8 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <Icon name="brain" size={22} color="#fff" />
       }
     },
+    CalmCloud: CalmCloudNavigator,
+
     Menu: {
       screen: Menu,
       title: "Menu",

@@ -1,5 +1,5 @@
 // screens/SplashScreen.js
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   View,
@@ -8,9 +8,9 @@ import {
   Dimensions,
   TouchableOpacity,
   Animated,
-  Easing,
-} from 'react-native';
-const win = Dimensions.get('window');
+  Easing
+} from "react-native";
+const win = Dimensions.get("window");
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -18,53 +18,53 @@ const styles = StyleSheet.create({
     //height: win.height,
     padding: 1,
     //alignSelf: 'flex-start',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2"
   },
   logo: {
     flex: 1,
-    width: '80%',
-    alignSelf: 'center',
+    width: "80%",
+    alignSelf: "center",
     marginTop: 100,
-    marginBottom: 50,
+    marginBottom: 50
   },
   padding: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: 24
   },
   helloText: {
-    textAlign: 'center',
-    fontSize: 34,
+    textAlign: "center",
+    fontSize: 34
   },
   missionText: {
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20,
-    marginBottom: 50,
+    marginBottom: 50
   },
   upsy: {
     flex: 4,
-    width: '80%',
-    alignSelf: 'center',
-    paddingBottom: 100,
+    width: "80%",
+    alignSelf: "center",
+    paddingBottom: 100
   },
   upsyImg: {
     flex: 1,
-    width: '70%',
-    alignSelf: 'center',
-    marginBottom: 200,
+    width: "70%",
+    alignSelf: "center",
+    marginBottom: 200
   },
   getStartedText: {
     fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 100,
-  },
+    textAlign: "center",
+    marginBottom: 100
+  }
 });
 
-const TWO_SECONDS = 2000;
+const TWO_SECONDS = 500;
 
 export default class SplashScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
   componentDidMount() {
     // When mounted, wait one second, then navigate to App
@@ -74,7 +74,7 @@ export default class SplashScreen extends React.Component {
       // It's main usage is to trigger navigation events.
       // Right here we're telling it to navigate to the route
       // with the name 'App'.
-      this.props.navigation.navigate('Menu');
+      this.props.navigation.navigate("StressInputPage");
     }, TWO_SECONDS);
   }
 
@@ -87,19 +87,19 @@ export default class SplashScreen extends React.Component {
         <View style={styles.padding}>
           <Image
             style={styles.logo}
-            source={require('../../assets/images/logo_upself.png')}
-            resizeMode={'contain'}
+            source={require("../../assets/images/logo_upself.png")}
+            resizeMode={"contain"}
           />
           <Text style={styles.helloText}> Hey I'm Upsy! </Text>
           <Text style={styles.missionText}>
-            {' '}
-            I'm here to make your day better!{' '}
+            {" "}
+            I'm here to make your day better!{" "}
           </Text>
 
           <Image
             style={styles.upsyImg}
-            source={require('../../assets/images/upsy_emo/upsy1_emo3.png')}
-            resizeMode={'contain'}
+            source={require("../../assets/images/upsy_emo/upsy1_emo3.png")}
+            resizeMode={"contain"}
           />
         </View>
       </View>
