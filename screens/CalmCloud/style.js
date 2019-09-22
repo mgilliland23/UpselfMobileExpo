@@ -43,7 +43,8 @@ export default StyleSheet.create({
   },
   bottomText: {
     display: "flex",
-    //marginBottom: 100,
-    flex: 1
+    marginTop: 80,
+    flex: 1,
+    textAlign: "center"
   }
 });
