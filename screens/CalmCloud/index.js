@@ -9,7 +9,8 @@ import {
   Easing,
   TouchableOpacity,
   NativeModules,
-  Keyboard
+  Keyboard,
+  Text
 } from "react-native";
 
 import styles from "./style.js";
@@ -27,7 +28,7 @@ export default class StressCloud extends Component {
     //Prop to hold the animation value of the stressballs height and width
     this.stressBallScaleValue = new Animated.Value(1);
     this.causeTextOpacity = new Animated.Value(1);
-    this.instructionsTextOpacity = new Animated.Value(0);
+    this.instructionsTextOpacity = new Animated.Value(1);
     this.instructionsArr = [
       "first instruction",
       "second instruction",
@@ -37,7 +38,7 @@ export default class StressCloud extends Component {
     ];
 
     this.state = {
-      text: "Now tap the circle and watch your stress dissapear",
+      text: "Now tap the stress ball and watch it dissapear",
       instructionsPosition: 0,
       animationStarted: false
     };
@@ -144,18 +145,6 @@ export default class StressCloud extends Component {
       <View style={styles.background}>
         {clouds}
         <View style={styles.padding}>
-          <FadeInView style={styles.topText} duration={3000}>
-            <Animated.Text
-              style={[
-                styles.getStartedText,
-                { opacity: this.causeTextOpacity }
-              ]}
-            >
-              {" "}
-              Tap the stressball to type in something that is causing you stress{" "}
-            </Animated.Text>
-          </FadeInView>
-
           <FadeInView style={styles.stressBallSection} duration={3500}>
             <TouchableOpacity
               onPress={() =>
@@ -179,7 +168,7 @@ export default class StressCloud extends Component {
                 source={require("../../assets/images/circle.png")}
                 resizeMode={"contain"}
               >
-                <StressTextInput />
+                <Text />
               </AnimatedImage>
             </TouchableOpacity>
           </FadeInView>

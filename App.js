@@ -39,9 +39,9 @@ const CalmCloudNavigator = createStackNavigator(
     initialRouteName: "StressInputPage",
     navigationOptions: {
       tabBarLabel: "Calm Cloud",
-      tabBarColor: "#936df4",
+      tabBarColor: "#6d8bf4",
       activeColor: "#fff",
-      tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+      tabBarIcon: <EnIcon name="cloud" size={22} color="#fff" />
     }
   }
 );

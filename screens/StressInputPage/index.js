@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import StressTextInput from "../../components/StressTextInput";
 import { Button } from "react-native-paper";
+import FloatingClouds from "../../components/FloatingClouds";
 
 const win = Dimensions.get("window");
 const styles = StyleSheet.create({
@@ -52,6 +53,7 @@ export default class StressInputPage extends Component {
   render() {
     return (
       <View style={styles.background}>
+        <FloatingClouds />
         <View style={styles.padding}>
           <Text style={styles.text}>
             Tap the screen to type in something that is causing you stress
