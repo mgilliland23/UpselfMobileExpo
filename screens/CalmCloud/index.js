@@ -18,10 +18,6 @@ import styles from "./style.js";
 //Make the react ImageBackground component an animatable component
 const AnimatedImage = Animated.createAnimatedComponent(ImageBackground);
 
-const { UIManager } = NativeModules;
-UIManager.setLayoutAnimationEnabledExperimental &&
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-
 export default class StressCloud extends Component {
   constructor(props) {
     super(props);
@@ -135,16 +131,21 @@ export default class StressCloud extends Component {
   };
 
   render() {
-    const startAnim = this.state.animationStarted;
-    let clouds;
-    if (startAnim) {
-      clouds = <FloatingClouds />;
-    }
+    const { navigation } = this.props;
+    const inputText = navigation.getParam("inputValue", "some default value");
+    console.log(inputText);
+
+    // const startAnim = this.state.animationStarted;
+    // let clouds;
+    // if (startAnim) {
+    //   clouds = <FloatingClouds />;
+    // }
 
     return (
       <View style={styles.background}>
-        {clouds}
+        <FloatingClouds />
         <View style={styles.padding}>
+          <View style={styles.topPadding} />
           <FadeInView style={styles.stressBallSection} duration={3500}>
             <TouchableOpacity
               onPress={() =>
@@ -168,7 +169,7 @@ export default class StressCloud extends Component {
                 source={require("../../assets/images/circle.png")}
                 resizeMode={"contain"}
               >
-                <Text />
+                <Text style={styles.stressText}>{inputText}</Text>
               </AnimatedImage>
             </TouchableOpacity>
           </FadeInView>

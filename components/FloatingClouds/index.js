@@ -37,7 +37,7 @@ export default class FloatingClouds extends Component {
           this.setState(prevState => ({
             cloudsArr: [
               ...prevState.cloudsArr,
-              <Cloud xPosition={xVal} id={cloudCount} />
+              <Cloud xPosition={xVal} key={cloudCount} />
             ]
           }));
           break;
@@ -51,7 +51,7 @@ export default class FloatingClouds extends Component {
           this.setState(prevState => ({
             cloudsArr: [
               ...prevState.cloudsArr,
-              <Cloud xPosition={xVal} id={cloudCount} />
+              <Cloud xPosition={xVal} key={cloudCount} />
             ]
           }));
           break;
@@ -66,7 +66,7 @@ export default class FloatingClouds extends Component {
           this.setState(prevState => ({
             cloudsArr: [
               ...prevState.cloudsArr,
-              <Cloud xPosition={xVal} id={cloudCount} />
+              <Cloud xPosition={xVal} key={cloudCount} />
             ]
           }));
           break;
