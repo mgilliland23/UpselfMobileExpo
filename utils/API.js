@@ -38,7 +38,7 @@ function getCompliment(message) {
   
   // need to change the JSON that this function links to (copied from regular chat for the time being)
   return axios
-    .post('https://upself-web.herokuapp.com/api/jaroMessage', {
+    .post('https://upself-web.herokuapp.com/api/jaroCompliment', {
       params: {userMessage: message},
     })
     .then(
