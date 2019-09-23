@@ -81,7 +81,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarLabel: "Compliment",
         tabBarColor: "#FF5733",
         activeColor: "#fff",
-        tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+        tabBarIcon: <Icon name="heart" size={22} color="#fff" />
       }
     },
 
