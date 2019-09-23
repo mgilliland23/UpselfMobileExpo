@@ -1,21 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component, Fragment} from 'react';
-import {Animated, Dimensions} from 'react-native';
+import React, { Component, Fragment } from "react";
+import { Animated, Dimensions } from "react-native";
 
-import Cloud from '../Cloud';
+import Cloud from "../Cloud";
 
-const win = Dimensions.get('window');
+const win = Dimensions.get("window");
 
 export default class FloatingClouds extends Component {
   //Prevent the component from re rendering when the state is updated in ClamCloud page
   //I.e. when the stressball is tapped, we don't want this componenet to re render
   constructor(props) {
     super(props);
-    this.state = {cloudsArr: []};
+    this.state = { cloudsArr: [] };
   }
 
   componentDidMount() {
-    console.log('create clouds');
+    console.log("create clouds");
     this.createClouds();
   }
 
@@ -25,12 +25,9 @@ export default class FloatingClouds extends Component {
     //Pass a range for the position the new cloud should be rendered on the x-axis
     //Make sure no two clouds render ontop of/ intersecting each other
     let placeCloud = cloudCount => {
-      console.log(cloudCount);
-
       //Should we break the screen into 2 sections or 3?
       switch (cloudCount % 3) {
         case 0:
-          console.log('beginning third of screen');
           //Dont let the cloud be generated anywhere outside of the first third of the screen's x-axis
           let max = win.width / 2 - 120;
           //Make sure the entire cloud fits on the screen?
@@ -40,12 +37,11 @@ export default class FloatingClouds extends Component {
           this.setState(prevState => ({
             cloudsArr: [
               ...prevState.cloudsArr,
-              <Cloud xPosition={xVal} id={cloudCount} />,
-            ],
+              <Cloud xPosition={xVal} key={cloudCount} />
+            ]
           }));
           break;
         case 1:
-          console.log('center third of screen');
           //Make sure the entire cloud fits on the screen?=
           max = win.width - 100;
           //Dont let the cloud be generated anywhere outside of the last third of the screen's x-axis
@@ -55,8 +51,8 @@ export default class FloatingClouds extends Component {
           this.setState(prevState => ({
             cloudsArr: [
               ...prevState.cloudsArr,
-              <Cloud xPosition={xVal} id={cloudCount} />,
-            ],
+              <Cloud xPosition={xVal} key={cloudCount} />
+            ]
           }));
           break;
 
@@ -70,8 +66,8 @@ export default class FloatingClouds extends Component {
           this.setState(prevState => ({
             cloudsArr: [
               ...prevState.cloudsArr,
-              <Cloud xPosition={xVal} id={cloudCount} />,
-            ],
+              <Cloud xPosition={xVal} key={cloudCount} />
+            ]
           }));
           break;
       }
@@ -83,7 +79,7 @@ export default class FloatingClouds extends Component {
       placeCloud(numClouds);
       if (numClouds > 30) {
         stopAnimation();
-        console.log('stop producing clouds');
+        console.log("stop producing clouds");
       }
     }, 2000);
 

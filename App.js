@@ -28,10 +28,12 @@ console.disableYellowBox = true;
 const CalmCloudNavigator = createStackNavigator(
   {
     StressInputPage: {
-      screen: StressInputPage
+      screen: StressInputPage,
+      gesturesEnabled: false
     },
     CalmCloud: {
-      screen: CalmCloud
+      screen: CalmCloud,
+      gesturesEnabled: false
     }
   },
   {
@@ -39,9 +41,10 @@ const CalmCloudNavigator = createStackNavigator(
     initialRouteName: "StressInputPage",
     navigationOptions: {
       tabBarLabel: "Calm Cloud",
-      tabBarColor: "#936df4",
+      tabBarColor: "#6d8bf4",
       activeColor: "#fff",
-      tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+      gesturesEnabled: false,
+      tabBarIcon: <EnIcon name="cloud" size={22} color="#fff" />
     }
   }
 );
@@ -60,16 +63,17 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarColor: "#6de5f4",
         activeColor: "#fff",
         inactiveColor: "#fff",
+        gesturesEnabled: false,
         tabBarIcon: <EnIcon name="chat" size={22} color="#fff" />
       }
     },
     Memory: {
       screen: Memory,
-
       navigationOptions: {
         tabBarLabel: "Arcade",
         tabBarColor: "#936df4",
         activeColor: "#fff",
+        gesturesEnabled: false,
         tabBarIcon: <Icon name="brain" size={22} color="#fff" />
       }
     },
@@ -83,6 +87,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarColor: "#6bccf3",
         activeColor: "#fff",
         inactiveColor: "#fff",
+        gesturesEnabled: false,
         tabBarIcon: <EnIcon name="menu" size={22} color="#fff" />
       }
     }
@@ -94,7 +99,8 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
   {
     //Render the splash screen on app load, which redirects to menu after 2 seconds
     initialRouteName: "Menu",
-    resetOnBlur: true
+    resetOnBlur: true,
+    gesturesEnabled: false
   }
 );
 
@@ -107,11 +113,12 @@ const MainNavigator = createStackNavigator(
       navigationOptions: {
         tabBarVisible: false,
         tabBarColor: "#6bccf3",
-        activeColor: "#6bccf3"
+        activeColor: "#6bccf3",
+        gesturesEnabled: false
       }
     }
   },
-  { headerMode: "none", initialRouteName: "Splash" }
+  { headerMode: "none", initialRouteName: "Splash", gesturesEnabled: false }
 );
 
 const App = createAppContainer(MainNavigator);
