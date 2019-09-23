@@ -34,7 +34,7 @@ function getMessageJaro(message) {
 }
 
 function getCompliment(message) {
-  console.log('making api request...');
+  console.log('making compliments api request...');
   
   // need to change the JSON that this function links to (copied from regular chat for the time being)
   return axios
