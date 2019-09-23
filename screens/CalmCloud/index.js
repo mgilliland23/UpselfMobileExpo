@@ -131,18 +131,8 @@ export default class StressCloud extends Component {
       <View style={styles.background}>
         <FloatingClouds />
         <View style={styles.padding}>
-          <FadeInView style={styles.bottomText} duration={200}>
-            <Animated.Text
-              style={[
-                styles.getStartedText,
-                {
-                  opacity: this.instructionsTextOpacity
-                }
-              ]}
-            >
-              {this.state.instructionText}
-            </Animated.Text>
-          </FadeInView>
+          <View style={styles.topPadding} />
+
           <FadeInView style={styles.stressBallSection} duration={3500}>
             <TouchableOpacity
               onPress={() =>
@@ -170,7 +160,18 @@ export default class StressCloud extends Component {
               </AnimatedImage>
             </TouchableOpacity>
           </FadeInView>
-          <View style={styles.topPadding} />
+          <FadeInView style={styles.bottomText} duration={200}>
+            <Animated.Text
+              style={[
+                styles.getStartedText,
+                {
+                  opacity: this.instructionsTextOpacity
+                }
+              ]}
+            >
+              {this.state.instructionText}
+            </Animated.Text>
+          </FadeInView>
         </View>
       </View>
     );
