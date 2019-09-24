@@ -74,7 +74,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       }
     },
 
-    Compliment: {
+    ComplimentChat: {
       screen: ComplimentChat,
 
       navigationOptions: {
