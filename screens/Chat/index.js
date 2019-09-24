@@ -1,9 +1,15 @@
-import React from 'react';
-import {Button} from 'react-native';
-import {GiftedChat} from 'react-native-gifted-chat';
-import API from '../../utils/API';
+import React from "react";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { GiftedChat } from "react-native-gifted-chat";
+import API from "../../utils/API";
 
-import logo from '../../assets/images/check/check1.png';
+import logo from "../../assets/images/check/check1.png";
+
+const styles = StyleSheet.create({
+  chat: {
+    display: "flex"
+  }
+});
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -11,7 +17,7 @@ export default class Chat extends React.Component {
   }
 
   state = {
-    messages: [],
+    messages: []
   };
 
   //Set initial state for when chat is first started
@@ -24,11 +30,11 @@ export default class Chat extends React.Component {
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'Upsy',
-            avatar: logo,
-          },
-        },
-      ],
+            name: "Upsy",
+            avatar: logo
+          }
+        }
+      ]
     });
   }
 
@@ -46,18 +52,18 @@ export default class Chat extends React.Component {
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'Upsy',
-            avatar: logo,
-          },
+            name: "Upsy",
+            avatar: logo
+          }
           // Any additional custom parameters are passed through
         };
         console.log(upsyMessage);
         //Append Upsy's message to the chat
         this.setState(previousState => ({
-          messages: GiftedChat.append(previousState.messages, upsyMessage),
+          messages: GiftedChat.append(previousState.messages, upsyMessage)
         }));
         //Bind this to maintain proper scop for setState
-      }.bind(this),
+      }.bind(this)
     );
   };
 
@@ -66,12 +72,12 @@ export default class Chat extends React.Component {
     // Append user's message to the chat
     this.setState(
       previousState => ({
-        messages: GiftedChat.append(previousState.messages, messages),
+        messages: GiftedChat.append(previousState.messages, messages)
       }),
       () => {
         //Get response from Upsy
         this.getUpsyResponse();
-      },
+      }
     );
   }
 
@@ -81,7 +87,7 @@ export default class Chat extends React.Component {
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: 1,
+          _id: 1
         }}
       />
     );
