@@ -12,7 +12,7 @@ import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
 import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
-import Compliment from "./screens/ComplimentChat";
+import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -77,6 +77,18 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <Icon name="brain" size={22} color="#fff" />
       }
     },
+
+    Compliment: {
+      screen: ComplimentChat,
+
+      navigationOptions: {
+        tabBarLabel: "Compliment",
+        tabBarColor: "#FF5733",
+        activeColor: "#fff",
+        tabBarIcon: <Icon name="heart" size={22} color="#fff" />
+      }
+    },
+
     CalmCloud: CalmCloudNavigator,
 
     Menu: {
@@ -91,10 +103,6 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <EnIcon name="menu" size={22} color="#fff" />
       }
     }
-
-    // Compliment: {
-    //   screen: Compliment,
-    // },
   },
   {
     //Render the splash screen on app load, which redirects to menu after 2 seconds

@@ -3,17 +3,39 @@ import {Button} from 'react-native';
 import {GiftedChat} from 'react-native-gifted-chat';
 import API from '../../utils/API';
 
-import logo from '../../assets/images/check/check1.png';
+import logo from '../../assets/images/check/check3.png';
 
-export default class Chat extends React.Component {
+export default class ComplimentChat extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+  }
+    state = {
       //Set initial state for when chat is first started
+      messages: [],
+    };
+      
+  
+  // static navigationOptions = ({navigation}) => {
+  //   return {
+  //     title: 'Upsy Love',
+
+  //     headerStyle: {
+  //       backgroundColor: '#6bccf3',
+  //     },
+  //     headerTintColor: '#fff',
+  //     headerTitleStyle: {
+  //       fontWeight: 'bold',
+  //     },
+  //   };
+  // };
+
+  // replicated from regular chat
+  componentDidMount() {
+    this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Everything would be better if more people were like you!',
+          text: "Get ready to hear some compliments. Reply with anything to get started",
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -22,27 +44,14 @@ export default class Chat extends React.Component {
           },
         },
       ],
-    };
+    });
   }
-  static navigationOptions = ({navigation}) => {
-    return {
-      title: 'Upsy Love',
 
-      headerStyle: {
-        backgroundColor: '#6bccf3',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    };
-  };
 
-  //Get a response from upsy using the upself web API
   getUpsyCompliment = () => {
     console.log(this.state.messages[0]);
     //Pass the user's message to the upself API and append Upsy's response to the chat
-    API.getCompliment().then(
+    API.getCompliment(this.state.messages[0].text).then(
       function(response) {
         //Create message object containg the response from the API.
         //This is the object that the Gifted Chat component expects
@@ -66,6 +75,12 @@ export default class Chat extends React.Component {
       }.bind(this),
     );
   };
+
+
+
+
+
+
 
   //Handle when a user sends a new message
   onSend(messages = []) {
