@@ -61,58 +61,13 @@ const styles = StyleSheet.create({
   },
 });
 
-var counterInterval = 4;
-
 export default class Menu extends Component {
-  // state = {
-  //   color: ['rgba(255,72,196,0.8)', 'rgba(43,209,252,0.8)'],
-  //   colors: [
-  //     ['rgba(255,72,196,0.8)', 'rgba(43,209,252,0.8)'],
-  //     ['rgba(43,209,252,0.8)', 'rgba(243,234,95,0.8)'],
-  //     ['rgba(243,234,95,0.8)', 'rgba(192,77,249,0.8)'],
-  //     ['rgba(192,77,249,0.8)', 'rgba(255,72,196,0.8)'],
-  //   ],
-  //   // nextIndex: 0,
-  // };
-
-  // componentWillMount() {
-  //   this.animatedValue = new Animated.Value(0);
-  // }
-
-  // animateColor() {
-  //   Animated.timing(this.animatedValue, {
-  //     toValue: 500,
-  //     duration: 3000,
-  //     // easing: Easing.linear,
-  //   }).start();
-  // }
-
-  // componentDidMount() {
-  //   // this.animateColor();
-
-  //   setInterval(() => {
-  //     // console.log("set interval");
-  //     // console.log(this.state.colors.length);
-  //     // this.setState({color: this.state.colors[counterInterval]});
-  //     this.setState({color: this.state.colors[counterInterval % 4]});
-  //     counterInterval++;
-  //   }, 1000);
-  // }
-
   static navigationOptions = {
     header: null,
   };
 
   render() {
-    // const interpolateColor = this.animatedValue.interpolate({
-    //   inputRange: [0, 300],
-    //   outputRange: this.state.color,
-    // });
-    // const animatedStyle = {
-    //   backgroundColor: interpolateColor,
-    // };
     return (
-      // <Animated.View style={[styles.background, animatedStyle]}>
       <Animated.View style={styles.background}>
         <Image
           style={styles.logo}
@@ -234,7 +189,7 @@ export default class Menu extends Component {
               }}>
               <View>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('')}>
+                  onPress={() => this.props.navigation.navigate('StressTest')}>
                   <Image
                     style={styles.upsyImg}
                     source={require('../../assets/images/menu_icons/stresstest.png')}

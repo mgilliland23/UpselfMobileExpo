@@ -14,6 +14,7 @@ import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
+import StressTest from "./screens/StressTest";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -83,6 +84,17 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarColor: "#FF5733",
         activeColor: "#fff",
         tabBarIcon: <Icon name="heart" size={22} color="#fff" />
+      }
+    },
+
+    StressTest: {
+      screen: StressTest,
+
+      navigationOptions: {
+        tabBarLabel: "StressTest",
+        tabBarColor: "#f46d8b",
+        activeColor: "#fff",
+        tabBarIcon: <Icon name="question" size={22} color="#fff" />
       }
     },
 

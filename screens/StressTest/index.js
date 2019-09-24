@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import dassQuestions from './questions';
 import DassResponse from '../../components/DassResponse';
-import DassResults from '../../components/DassResults';
+// import DassResults from '../../components/DassResults';
 
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -92,7 +92,7 @@ export default class StressTest extends Component {
       console.info('stressCount: ' + this.state.stressCount);
 
       // Change button colors
-      this.changeBtnCol();
+    //   this.changeBtnCol();
     } else {
       // If all questions are answered, double counts and get results
       this.setState({
