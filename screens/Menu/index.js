@@ -130,7 +130,8 @@ export default class Menu extends Component {
           <Swiper
             // loop = {false}
             showsPagination={true}
-            showsButtons={true}>
+            // showsButtons={true}
+            >
             <View
               style={{
                 flexDirection: 'column',
