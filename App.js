@@ -14,6 +14,7 @@ import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
+import StressTest from "./screens/StressTest";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -86,6 +87,17 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       }
     },
 
+    StressTest: {
+      screen: StressTest,
+
+      navigationOptions: {
+        tabBarLabel: "StressTest",
+        tabBarColor: "#f46d8b",
+        activeColor: "#fff",
+        tabBarIcon: <Icon name="question" size={22} color="#fff" />
+      }
+    },
+
     CalmCloud: CalmCloudNavigator,
 
     Menu: {
@@ -123,7 +135,15 @@ const MainNavigator = createStackNavigator(
         activeColor: "#6bccf3",
         gesturesEnabled: false
       }
-    }
+    },
+    StressTest: {
+      screen: StressTest,
+      navigationOptions: {
+        tabBarVisible: false,
+        tabBarColor: '#6bccf3',
+        activeColor: '#6bccf3',
+      },
+    },
   },
   { headerMode: "none", initialRouteName: "Splash", gesturesEnabled: false }
 );
