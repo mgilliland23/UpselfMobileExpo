@@ -1,10 +1,11 @@
 import React from 'react';
 import {Button} from 'react-native';
-import {GiftedChat} from 'react-native-gifted-chat';
+// import {GiftedChat} from 'react-native-gifted-chat';
 import API from '../../utils/API';
 import logo from '../../assets/images/check/check3.png';
 
 import bg from '../../assets/images/check/check3.png'
+import ComplimentCard from "../../components/ComplimentCard"
 
 import {
   StyleSheet,
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '90%',
     alignSelf: 'center',
-    marginTop: '20%',
+    marginTop: '40%',
     marginBottom: -60,
   },
   upsyImg: {
@@ -73,14 +74,15 @@ export default class ComplimentChat extends React.Component {
   constructor(props) {
     super(props);
     this.cloudPosition = new Animated.Value(0);
-  }
-    state = {
-      messages: "",
+    this.state = {
+      compliment: "FILLER COMPLIMENT TEXT",
       animationStarted: false,
-      hideUpsy: false,
-      showCompliment: true
+      // hideUpsy: false,
+      showCompliment: false
     };
-
+    this.getUpsyCompliment = this.getUpsyCompliment.bind(this)
+  }
+    
 
   componentDidMount() {
     // need to fill this in
@@ -90,7 +92,7 @@ export default class ComplimentChat extends React.Component {
   getUpsyCompliment = () => {
     //Pass the user's message to the upself API and append Upsy's response to the chat
     API.getCompliment("get compliment").then(
-      function(response) {
+      (response) => {
         //Create message object containg the response from the API.
         //This is the object that the Gifted Chat component expects
         let upsyMessage = {
@@ -104,15 +106,20 @@ export default class ComplimentChat extends React.Component {
           // Any additional custom parameters are passed through
         };
         console.log(upsyMessage);
-        consolelog(response.text)
+        
         //Append Upsy's message to the chat
         this.setState({
-          messages: response.text,
+          compliment: upsyMessage.text,
+          showCompliment: true
         });
-        //Bind this to maintain proper scop for setState
-      }.bind(this),
+      },
     );
   };
+
+
+  showCompliment = () => {
+    // use this to display modal
+  }
 
   // THINGS FROM REACT NATIVE TO INCORPORATE
   // Animated.spring()      // provides a simple spring physics model.
@@ -129,6 +136,15 @@ export default class ComplimentChat extends React.Component {
 
 
 render() {
+
+  const showCompliment = this.state.showCompliment;
+  let modal;
+  if (showCompliment) {
+    modal = <ComplimentCard />
+  }
+
+
+
   return (
     <View
       style={{
@@ -138,20 +154,28 @@ render() {
         alignItems: 'center',
         // backgroundColor: '#F46DCE30',
       }}>
+
+
+      <View>
+        <Text style={styles.menuSwipeText}>Compliments</Text>
+        <Text style={styles.getStartedText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
+      </View>
+
       <View>
         <TouchableOpacity
           onPress={() => this.getUpsyCompliment()}>
+
           <Image
             style={styles.upsyImg}
             source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
             resizeMode={'contain'}
           />
+
         </TouchableOpacity>
       </View>
-      <View>
-        <Text style={styles.menuSwipeText}>Get a compliment</Text>
-        <Text style={styles.getStartedText}>Press on Upsy to get started</Text>
-      </View>
+
+      {modal}
+      
     </View>
   )
 }
