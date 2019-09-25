@@ -1,58 +1,54 @@
 import React from 'react';
 import {Button} from 'react-native';
-import {GiftedChat} from 'react-native-gifted-chat';
 import API from '../../utils/API';
-
 import logo from '../../assets/images/check/check3.png';
+import bg from '../../assets/images/check/check3.png'
+import ComplimentCard from "../../components/ComplimentCard"
+import Modal from "react-native-modal";
+
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  Animated,
+  ImageBackground,
+  Linking,
+  Easing,
+} from 'react-native';
+
+import styles from './styles.js'
+
 
 export default class ComplimentChat extends React.Component {
   constructor(props) {
     super(props);
-  }
-    state = {
-      //Set initial state for when chat is first started
-      messages: [],
+    this.cloudPosition = new Animated.Value(0);
+    this.state = {
+      compliment: "Click on Upsy for a compliment",
+      animationStarted: false,
+      hideUpsy: false,   // use this to transform upsy
+      hideUpsyDirection: [],  // use to change where upsy disappears to
+      isModalVisible: false
     };
-      
-  
-  // static navigationOptions = ({navigation}) => {
-  //   return {
-  //     title: 'Upsy Love',
+    this.getUpsyCompliment = this.getUpsyCompliment.bind(this)
+  }
+    
 
-  //     headerStyle: {
-  //       backgroundColor: '#6bccf3',
-  //     },
-  //     headerTintColor: '#fff',
-  //     headerTitleStyle: {
-  //       fontWeight: 'bold',
-  //     },
-  //   };
-  // };
-
-  // replicated from regular chat
   componentDidMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: "Get ready to hear some compliments. Reply with anything to get started",
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'Upsy',
-            avatar: logo,
-          },
-        },
-      ],
-    });
+    this.getUpsyCompliment()
   }
 
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
 
   getUpsyCompliment = () => {
-    console.log(this.state.messages[0]);
     //Pass the user's message to the upself API and append Upsy's response to the chat
-    API.getCompliment(this.state.messages[0].text).then(
-      function(response) {
+    API.getCompliment("get compliment").then(
+      (response) => {
         //Create message object containg the response from the API.
         //This is the object that the Gifted Chat component expects
         let upsyMessage = {
@@ -62,49 +58,108 @@ export default class ComplimentChat extends React.Component {
           user: {
             _id: 2,
             name: 'Upsy',
-            avatar: logo,
           },
-          // Any additional custom parameters are passed through
         };
         console.log(upsyMessage);
-        //Append Upsy's message to the chat
-        this.setState(previousState => ({
-          messages: GiftedChat.append(previousState.messages, upsyMessage),
-        }));
-        //Bind this to maintain proper scop for setState
-      }.bind(this),
+        
+        this.setState({
+          compliment: upsyMessage.text,
+        });
+      },
     );
   };
 
 
-
-
-
-
-
-  //Handle when a user sends a new message
-  onSend(messages = []) {
-    // Append user's message to the chat
-    this.setState(
-      previousState => ({
-        messages: GiftedChat.append(previousState.messages, messages),
-      }),
-      () => {
-        //Get response from Upsy
-        this.getUpsyCompliment();
-      },
-    );
+  showCompliment = () => {
+    this.setState({ isModalVisible: true })
   }
 
-  render() {
+  animateUpsy = () => {
+    this.setState({ hideUpsy: !this.state.hideUpsy });
+    if (this.state.hideUpsy) {
+      // make upsy do something
+      console.log("hide upsy")
+    }
+    else {
+      // bring upsy back
+      console.log("show upsy")
+    }
+  }
+
+  // THINGS FROM REACT NATIVE TO INCORPORATE
+  // Animated.spring()      // provides a simple spring physics model.
+  // Animated.timing()      // animates a value over time using easing functions.
+
+  // Animated.timing(
+  //   // Animate value over time
+  //   this.state.fadeAnim, // The value to drive
+  //   {
+  //     toValue: 1, // Animate to final value of 1
+  //   },
+  // ).start(); // Start the animation
+
+
+
+render() {
+  const isModalVisible = this.state.isModalVisible;
+  if (isModalVisible) {
+    modal = <ComplimentCard compliment={this.state.compliment} />
+  }
+
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
-        user={{
-          _id: 1,
-        }}
-      />
-    );
+      <View
+        style={ styles.view }>
+
+        <View >
+          <Text style={styles.subtitleText} >Press on Upsy to get started</Text>
+
+        </View>
+        <View >
+          <TouchableOpacity
+            onPress={() => {
+              this.getUpsyCompliment();
+              this.toggleModal();
+              this.animateUpsy();  // working on this function
+            }}>
+
+            <Image
+              style={ styles.upsyImg }
+              source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
+              resizeMode={'contain'}
+            />
+
+          </TouchableOpacity>
+        </View>
+        
+        {/* MODAL START */}
+        <View >
+          <Modal 
+            style={ styles.background }
+
+              isVisible={this.state.isModalVisible}
+
+              swipeDirection='right'
+              animationIn='slideInUp'
+              animationInTiming={500}
+              animationOut='slideOutDown'
+              animationOutTiming={750}
+              backdropColor='#fff'
+              backdropOpacity={.5}
+
+            >
+            <View  style={ styles.modalSpacing } >
+              <Text style={styles.text} >
+                  {this.state.compliment}
+              </Text>
+              <Button title="Done" onPress={() => {
+                this.toggleModal()
+                this.animateUpsy()
+                }}/>
+            </View>
+          </Modal>
+        </View>
+
+      </View>
+    )
   }
 }
