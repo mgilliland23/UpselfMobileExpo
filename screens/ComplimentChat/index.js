@@ -6,6 +6,7 @@ import logo from '../../assets/images/check/check3.png';
 
 import bg from '../../assets/images/check/check3.png'
 import ComplimentCard from "../../components/ComplimentCard"
+import Modal from "react-native-modal";
 
 import {
   StyleSheet,
@@ -26,31 +27,17 @@ const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   
   upsyImg: {
-    // width: 200,
     height: 300,
-    // flexDirection: 'column',
-    // alignSelf: 'center',
     justifyContent: 'center',
   },
 
-  // titleText: {
-  //     fontSize: 40,
-  //     // textAlign: 'center',
-  //     color: '#F46DCE',
-  //     fontWeight: 'bold',
-  //     justifyContent: 'center',
-  //     textAlign: 'center',
-  //     marginTop: 20
-  //   },
 
   subtitleText: {
     fontSize: 20,
     textAlign: 'center',
     color: '#F46DCE',
-    // fontWeight: 'bold',
     marginTop: 100,
     padding: 10,
-    alignItems: 'stretch',
   },
   
 });
@@ -61,17 +48,18 @@ export default class ComplimentChat extends React.Component {
     super(props);
     this.cloudPosition = new Animated.Value(0);
     this.state = {
-      compliment: "FILLER COMPLIMENT TEXT",
+      compliment: ".",
       animationStarted: false,
       // hideUpsy: false,
-      showCompliment: false
+
+      isModalVisible: false
     };
     this.getUpsyCompliment = this.getUpsyCompliment.bind(this)
   }
     
 
   componentDidMount() {
-    // need to fill this in
+    this.getUpsyCompliment()
   }
 
 
@@ -96,15 +84,15 @@ export default class ComplimentChat extends React.Component {
         //Append Upsy's message to the chat
         this.setState({
           compliment: upsyMessage.text,
-          showCompliment: true
         });
+        this.showCompliment()
       },
     );
   };
 
 
   showCompliment = () => {
-    // use this to display modal
+    this.setState({ isModalVisible: true })
   }
 
   // THINGS FROM REACT NATIVE TO INCORPORATE
@@ -122,13 +110,11 @@ export default class ComplimentChat extends React.Component {
 
 
 render() {
-  const showCompliment = this.state.showCompliment;
+  const isModalVisible = this.state.isModalVisible;
   let modal;
-  if (showCompliment) {
-    modal = <ComplimentCard />
+  if (isModalVisible) {
+    modal = <ComplimentCard compliment={this.state.compliment} />
   }
-
-
 
   return (
     <View
@@ -141,14 +127,16 @@ render() {
       }}>
 
 
-      <View>
-        {/* <Text style={styles.titleText}>Compliments</Text> */}
+      <View >
+        {/* <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text> */}
         <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
-      </View>
 
-      <View>
+      </View>
+      <View >
         <TouchableOpacity
-          onPress={() => this.getUpsyCompliment()}>
+          onPress={() => {this.getUpsyCompliment()
+            // add another function in there that will open the modal?
+          }}>
 
           <Image
             style={ styles.upsyImg }
@@ -158,44 +146,13 @@ render() {
 
         </TouchableOpacity>
       </View>
-
-      {modal}
       
+      {modal}
+
     </View>
   )
 }
 
 
 
-
-
-
-
-
-
-  // //Handle when a user sends a new message
-  // onSend(messages = []) {
-  //   // Append user's message to the chat
-  //   this.setState(
-  //     previousState => ({
-  //       messages: GiftedChat.append(previousState.messages, messages),
-  //     }),
-  //     () => {
-  //       //Get response from Upsy
-  //       this.getUpsyCompliment();
-  //     },
-  //   );
-  // }
-
-  // render() {
-  //   return (
-  //     <GiftedChat
-  //       messages={this.state.messages}
-  //       onSend={messages => this.onSend(messages)}
-  //       user={{
-  //         _id: 1,
-  //       }}
-  //     />
-  //   );
-  // }
 }

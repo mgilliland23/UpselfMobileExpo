@@ -1,63 +1,71 @@
-// compliment card / modal
-
-import React, {Component} from 'react';
-import {
-    Modal, 
+import React, { Component } from "react";
+import { 
+    Button, 
     Text, 
-    TouchableHighlight, 
-    View, 
-    Alert, 
-    StyleSheet,
-} from 'react-native';
+    View,
+    StyleSheet
+} from "react-native";
+import Modal from "react-native-modal";
 
 
 const styles = StyleSheet.create({
-    card: {
-       
+    text: {
+        fontSize: 30,
+        color: '#F46DCE',
+        textAlign: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
+
+    background: {
+        height: 50,
+        backgroundColor: 'white',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 350,
+        marginBottom: 250,
+        borderRadius: 15,
     }
 })
 
 
 
-export default class ModalExample extends Component {
+export default class ComplimentCard extends Component {
   state = {
-    modalVisible: true,
+    isModalVisible: false
   };
 
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
 
-  render() {
+  render(props) {
+    
     return (
-      <View style={{marginTop:20}, styles.card}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
-            <View>
-              <Text>Hello World!</Text>
+      <View >
+        <Button title="Show modal" onPress={this.toggleModal} />
+        <Modal 
+        style={ styles.background }
 
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
+            isVisible={this.state.isModalVisible}
+
+            swipeDirection='right'
+            animationIn='slideInUp'
+            animationInTiming={500}
+            animationOut='slideOutDown'
+            animationOutTiming={750}
+            backdropColor='#fff'
+            backdropOpacity={.5}
+
+        >
+          <View style={{ flex: 1 }}>
+            <Text {...props} style={styles.text} >
+                {this.props.compliment}
+            </Text>
+            <Button title="Done" onPress={this.toggleModal} />
           </View>
         </Modal>
-
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
       </View>
     );
   }
