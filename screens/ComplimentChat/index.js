@@ -134,7 +134,8 @@ render() {
       </View>
       <View >
         <TouchableOpacity
-          onPress={() => {this.getUpsyCompliment()
+          onPress={() => {
+            this.getUpsyCompliment()
             // add another function in there that will open the modal?
           }}>
 
