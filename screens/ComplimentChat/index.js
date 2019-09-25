@@ -29,7 +29,8 @@ export default class ComplimentChat extends React.Component {
     this.state = {
       compliment: "Click on Upsy for a compliment",
       animationStarted: false,
-      // hideUpsy: false,
+      hideUpsy: false,   // use this to transform upsy
+      hideUpsyDirection: [],  // use to change where upsy disappears to
       isModalVisible: false
     };
     this.getUpsyCompliment = this.getUpsyCompliment.bind(this)
@@ -73,6 +74,18 @@ export default class ComplimentChat extends React.Component {
     this.setState({ isModalVisible: true })
   }
 
+  animateUpsy = () => {
+    this.setState({ hideUpsy: !this.state.hideUpsy });
+    if (this.state.hideUpsy) {
+      // make upsy do something
+      console.log("hide upsy")
+    }
+    else {
+      // bring upsy back
+      console.log("show upsy")
+    }
+  }
+
   // THINGS FROM REACT NATIVE TO INCORPORATE
   // Animated.spring()      // provides a simple spring physics model.
   // Animated.timing()      // animates a value over time using easing functions.
@@ -89,7 +102,6 @@ export default class ComplimentChat extends React.Component {
 
 render() {
   const isModalVisible = this.state.isModalVisible;
-  // let modal;
   if (isModalVisible) {
     modal = <ComplimentCard compliment={this.state.compliment} />
   }
@@ -99,7 +111,7 @@ render() {
         style={ styles.view }>
 
         <View >
-          <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
+          <Text style={styles.subtitleText} >Press on Upsy to get started</Text>
 
         </View>
         <View >
@@ -107,6 +119,7 @@ render() {
             onPress={() => {
               this.getUpsyCompliment();
               this.toggleModal();
+              this.animateUpsy();  // working on this function
             }}>
 
             <Image
@@ -138,7 +151,10 @@ render() {
               <Text style={styles.text} >
                   {this.state.compliment}
               </Text>
-              <Button title="Done" onPress={this.toggleModal} />
+              <Button title="Done" onPress={() => {
+                this.toggleModal()
+                this.animateUpsy()
+                }}/>
             </View>
           </Modal>
         </View>

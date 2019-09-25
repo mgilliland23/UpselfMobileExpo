@@ -14,6 +14,7 @@ import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
+import StressTest from "./screens/StressTest";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -28,10 +29,12 @@ console.disableYellowBox = true;
 const CalmCloudNavigator = createStackNavigator(
   {
     StressInputPage: {
-      screen: StressInputPage
+      screen: StressInputPage,
+      gesturesEnabled: false
     },
     CalmCloud: {
-      screen: CalmCloud
+      screen: CalmCloud,
+      gesturesEnabled: false
     }
   },
   {
@@ -39,9 +42,9 @@ const CalmCloudNavigator = createStackNavigator(
     initialRouteName: "StressInputPage",
     navigationOptions: {
       tabBarLabel: "Calm Cloud",
-      tabBarColor: "#936df4",
+      tabBarColor: "#6d8bf4",
       activeColor: "#fff",
-      tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+      tabBarIcon: <EnIcon name="cloud" size={22} color="#fff" />
     }
   }
 );
@@ -65,7 +68,6 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
     },
     Memory: {
       screen: Memory,
-
       navigationOptions: {
         tabBarLabel: "Arcade",
         tabBarColor: "#936df4",
@@ -82,6 +84,17 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarColor: "#FF5733",
         activeColor: "#fff",
         tabBarIcon: <Icon name="heart" size={22} color="#fff" />
+      }
+    },
+
+    StressTest: {
+      screen: StressTest,
+
+      navigationOptions: {
+        tabBarLabel: "StressTest",
+        tabBarColor: "#f46d8b",
+        activeColor: "#fff",
+        tabBarIcon: <Icon name="question" size={22} color="#fff" />
       }
     },
 
@@ -102,7 +115,11 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
   {
     //Render the splash screen on app load, which redirects to menu after 2 seconds
     initialRouteName: "Menu",
-    resetOnBlur: true
+    resetOnBlur: true,
+    navigationOptions: {
+      gesturesEnabled: false
+    },
+    keyboardHidesNavigationBar: false
   }
 );
 
@@ -115,11 +132,20 @@ const MainNavigator = createStackNavigator(
       navigationOptions: {
         tabBarVisible: false,
         tabBarColor: "#6bccf3",
-        activeColor: "#6bccf3"
+        activeColor: "#6bccf3",
+        gesturesEnabled: false
       }
-    }
+    },
+    StressTest: {
+      screen: StressTest,
+      navigationOptions: {
+        tabBarVisible: false,
+        tabBarColor: '#6bccf3',
+        activeColor: '#6bccf3',
+      },
+    },
   },
-  { headerMode: "none", initialRouteName: "Splash" }
+  { headerMode: "none", initialRouteName: "Splash", gesturesEnabled: false }
 );
 
 const App = createAppContainer(MainNavigator);

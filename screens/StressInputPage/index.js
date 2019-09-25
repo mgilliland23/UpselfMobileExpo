@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 //import "./Bounce_upsy.css";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Keyboard,
+  Dimensions
+} from "react-native";
 import StressTextInput from "../../components/StressTextInput";
 import { Button } from "react-native-paper";
+import FloatingClouds from "../../components/FloatingClouds";
 
 const win = Dimensions.get("window");
 const styles = StyleSheet.create({
@@ -32,6 +40,16 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     fontSize: 20,
     textAlign: "center"
+  },
+  textInput: {
+    color: "black",
+    alignSelf: "center",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 30,
+    alignItems: "center",
+    width: "100%",
+    height: "50%"
   }
 });
 
@@ -48,18 +66,48 @@ export default class StressInputPage extends Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    value: "bitch"
+  };
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { name, type, text } = event;
+
+    console.log("text input value: ", text);
+    // const name = event.target.name;
+
+    // Updating the input's state
+    this.setState({
+      inputValue: text
+    });
+  };
 
   render() {
     return (
       <View style={styles.background}>
+        <FloatingClouds />
         <View style={styles.padding}>
           <Text style={styles.text}>
             Tap the screen to type in something that is causing you stress
           </Text>
-          <StressTextInput />
+          <TextInput
+            //{...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+            editable
+            value={this.state.inputValue}
+            name="firstName"
+            returnKeyType="done"
+            style={styles.textInput}
+            onSubmitEditing={Keyboard.dismiss}
+            multiline={true}
+            onChangeText={text => this.handleInputChange({ text })}
+          />
           <Button
             style={styles.button}
-            onPress={() => this.props.navigation.navigate("CalmCloud")}
+            onPress={() =>
+              this.props.navigation.navigate("CalmCloud", {
+                inputValue: this.state.inputValue
+              })
+            }
           >
             Go!
           </Button>
