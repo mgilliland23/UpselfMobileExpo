@@ -74,7 +74,8 @@ export default class SplashScreen extends React.Component {
       // It's main usage is to trigger navigation events.
       // Right here we're telling it to navigate to the route
       // with the name 'App'.
-      this.props.navigation.navigate("StressInputPage");
+      this.props.navigation.navigate("ComplimentChat");
+
     }, TWO_SECONDS);
   }
 

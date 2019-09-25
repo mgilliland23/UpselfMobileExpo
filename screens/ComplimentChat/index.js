@@ -24,49 +24,35 @@ import {
 
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: win.width,
-    padding: 1,
-    // backgroundColor: '#f2f2f2',
-    // backgroundColor: '#cef46d',
-  },
-  logo: {
-    flex: 1,
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: '40%',
-    marginBottom: -60,
-  },
+  
   upsyImg: {
-    width: 200,
-    height: 200,
-    alignSelf: 'center',
+    // width: 200,
+    height: 300,
+    // flexDirection: 'column',
+    // alignSelf: 'center',
     justifyContent: 'center',
   },
-  getStartedText: {
+
+  // titleText: {
+  //     fontSize: 40,
+  //     // textAlign: 'center',
+  //     color: '#F46DCE',
+  //     fontWeight: 'bold',
+  //     justifyContent: 'center',
+  //     textAlign: 'center',
+  //     marginTop: 20
+  //   },
+
+  subtitleText: {
     fontSize: 20,
     textAlign: 'center',
-    fontWeight: 'bold',
-    marginBottom: 20,
-    fontStyle: 'italic',
-  },
-  menuChatText: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginTop: -10,
-    marginRight: 55,
-    marginLeft: 55,
     color: '#F46DCE',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    marginTop: 100,
+    padding: 10,
+    alignItems: 'stretch',
   },
-  menuSwipeText: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: '#F46DCE',
-    fontWeight: 'bold',
-    justifyContent: 'center',
-  },
+  
 });
 
 
@@ -136,7 +122,6 @@ export default class ComplimentChat extends React.Component {
 
 
 render() {
-
   const showCompliment = this.state.showCompliment;
   let modal;
   if (showCompliment) {
@@ -157,8 +142,8 @@ render() {
 
 
       <View>
-        <Text style={styles.menuSwipeText}>Compliments</Text>
-        <Text style={styles.getStartedText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
+        {/* <Text style={styles.titleText}>Compliments</Text> */}
+        <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
       </View>
 
       <View>
@@ -166,7 +151,7 @@ render() {
           onPress={() => this.getUpsyCompliment()}>
 
           <Image
-            style={styles.upsyImg}
+            style={ styles.upsyImg }
             source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
             resizeMode={'contain'}
           />

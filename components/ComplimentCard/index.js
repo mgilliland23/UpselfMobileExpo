@@ -1,11 +1,27 @@
 // compliment card / modal
 
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert} from 'react-native';
+import {
+    Modal, 
+    Text, 
+    TouchableHighlight, 
+    View, 
+    Alert, 
+    StyleSheet,
+} from 'react-native';
+
+
+const styles = StyleSheet.create({
+    card: {
+       
+    }
+})
+
+
 
 export default class ModalExample extends Component {
   state = {
-    modalVisible: false,
+    modalVisible: true,
   };
 
   setModalVisible(visible) {
@@ -14,7 +30,7 @@ export default class ModalExample extends Component {
 
   render() {
     return (
-      <View style={{marginTop: 22}}>
+      <View style={{marginTop:20}, styles.card}>
         <Modal
           animationType="slide"
           transparent={false}
