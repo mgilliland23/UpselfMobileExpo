@@ -39,6 +39,25 @@ const styles = StyleSheet.create({
     marginTop: 100,
     padding: 10,
   },
+
+  text: {
+    fontSize: 30,
+    color: '#F46DCE',
+    textAlign: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+
+  background: {
+    height: 50,
+    backgroundColor: 'white',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 350,
+    marginBottom: 250,
+    borderRadius: 15,
+}
   
 });
 
@@ -62,6 +81,9 @@ export default class ComplimentChat extends React.Component {
     this.getUpsyCompliment()
   }
 
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
 
   getUpsyCompliment = () => {
     //Pass the user's message to the upself API and append Upsy's response to the chat
@@ -85,7 +107,6 @@ export default class ComplimentChat extends React.Component {
         this.setState({
           compliment: upsyMessage.text,
         });
-        this.showCompliment()
       },
     );
   };
@@ -126,9 +147,7 @@ render() {
         // backgroundColor: '#F46DCE30',
       }}>
 
-
       <View >
-        {/* <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text> */}
         <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
 
       </View>
@@ -136,7 +155,7 @@ render() {
         <TouchableOpacity
           onPress={() => {
             this.getUpsyCompliment()
-            // add another function in there that will open the modal?
+            this.toggleModal() 
           }}>
 
           <Image
@@ -148,7 +167,30 @@ render() {
         </TouchableOpacity>
       </View>
       
-      {modal}
+      {/* MODAL START */}
+      <View >
+        <Modal 
+        style={ styles.background }
+
+            isVisible={this.state.isModalVisible}
+
+            swipeDirection='right'
+            animationIn='slideInUp'
+            animationInTiming={500}
+            animationOut='slideOutDown'
+            animationOutTiming={750}
+            backdropColor='#fff'
+            backdropOpacity={.5}
+
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={styles.text} >
+                {this.state.compliment}
+            </Text>
+            <Button title="Done" onPress={this.toggleModal} />
+          </View>
+        </Modal>
+      </View>
 
     </View>
   )
