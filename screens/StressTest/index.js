@@ -54,7 +54,8 @@ export default class StressTest extends Component {
       depressionCount: 0,
       anxietyCount: 0,
       stressCount: 0,
-      buttonCol: ['#6bccf3', '#936df4', '#6d8bf4', '#6de5f4'],
+      buttonClicked: false,
+      // buttonCol: ['#6bccf3', '#936df4', '#6d8bf4', '#6de5f4'],
       // showModal: false,
     };
     this.handleResponse = this.handleResponse.bind(this);
@@ -63,6 +64,11 @@ export default class StressTest extends Component {
   // Handle User Response
   handleResponse(dassValue) {
     console.info("I'm being clicked");
+
+    if (!this.state.buttonClicked) {
+      
+    }
+
     console.info('Before state: ' + this.state.questionIndex);
     // Check for # of questions
     if (this.state.questionIndex < Object.keys(dassQuestions).length - 1) {
