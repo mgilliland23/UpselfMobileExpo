@@ -26,6 +26,14 @@ import {
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   
+  view: {
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: '#F46DCE30',
+  },
+
   upsyImg: {
     height: 300,
     justifyContent: 'center',
@@ -62,7 +70,8 @@ const styles = StyleSheet.create({
   modalSpacing: {
     flexDirection: 'column',
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    padding: 15
   }
 
   
@@ -146,13 +155,7 @@ render() {
 
   return (
     <View
-      style={{
-        flexDirection: 'column',
-        flex: 1,
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        // backgroundColor: '#F46DCE30',
-      }}>
+      style={ styles.view }>
 
       <View >
         <Text style={styles.subtitleText} onPress={() => this.showCompliment()}>Press on Upsy to get started</Text>
