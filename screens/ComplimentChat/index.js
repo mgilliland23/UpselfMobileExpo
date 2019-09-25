@@ -57,7 +57,14 @@ const styles = StyleSheet.create({
     marginTop: 350,
     marginBottom: 250,
     borderRadius: 15,
-}
+  },
+
+  modalSpacing: {
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'space-around'
+  }
+
   
 });
 
@@ -67,7 +74,7 @@ export default class ComplimentChat extends React.Component {
     super(props);
     this.cloudPosition = new Animated.Value(0);
     this.state = {
-      compliment: ".",
+      compliment: "Click on Upsy for a compliment",
       animationStarted: false,
       // hideUpsy: false,
 
@@ -132,7 +139,7 @@ export default class ComplimentChat extends React.Component {
 
 render() {
   const isModalVisible = this.state.isModalVisible;
-  let modal;
+  // let modal;
   if (isModalVisible) {
     modal = <ComplimentCard compliment={this.state.compliment} />
   }
@@ -154,8 +161,8 @@ render() {
       <View >
         <TouchableOpacity
           onPress={() => {
-            this.getUpsyCompliment()
-            this.toggleModal() 
+            this.getUpsyCompliment();
+            this.toggleModal();
           }}>
 
           <Image
@@ -183,7 +190,7 @@ render() {
             backdropOpacity={.5}
 
         >
-          <View style={{ flex: 1 }}>
+          <View  style={ styles.modalSpacing } >
             <Text style={styles.text} >
                 {this.state.compliment}
             </Text>

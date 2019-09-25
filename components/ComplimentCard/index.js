@@ -1,3 +1,7 @@
+// Emily has moved this whole card into the Compliment Chat component for initial development
+// this component is not currently being used
+
+
 import React, { Component } from "react";
 import { 
     Button, 
