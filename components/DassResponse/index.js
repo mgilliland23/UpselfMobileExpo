@@ -65,8 +65,6 @@ export default class DassResponse extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* { this.state.buttonClicked ? <View/> :  */}
-        {/* } */}
       </View>
     );
   }

@@ -70,7 +70,7 @@ export default class DassResults extends Component {
   };
 
   allNormal = (dValue, aValue, sValue) => {
-      if (dValue && aValue && sValue === 'Normal') {
+      if (dValue<=9 && aValue<=7 && sValue<=14) {
           return 'Normal'  
       }
   };
@@ -267,17 +267,17 @@ export default class DassResults extends Component {
             )}
           </View>
           <View style={{flex: 1, justifyContent: 'center'}}>
-          {/* {this.allNormal(depressionCount, anxietyCount, stressCount) === 'Normal' && (
+          {this.allNormal(depressionCount, anxietyCount, stressCount) === 'Normal' && (
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 5,
-                    fontSize: 17,
+                    fontSize: 20,
                     fontStyle: 'italic',
+                    marginBottom: 10,
                   }}>
-                  Enter the Arcade Room!
+                  You seem to be doing just fine, yay!
                 </Text>
-            )} */}
+            )}
             <View>
                 <TouchableOpacity
                 style={{
