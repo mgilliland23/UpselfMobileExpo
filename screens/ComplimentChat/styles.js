@@ -33,9 +33,7 @@ export default StyleSheet.create({
     fontSize: 30,
     color: '#F46DCE',
     textAlign: 'center',
-    // textAlign: 'center',
-    // flexDirection: 'column',
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
 
   modalSpacing: {
@@ -49,18 +47,6 @@ export default StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
     borderRadius: 15
-    // padding: 15
   },
-
-  // flexContainer: {
-    // height: '50%',
-    // justifyContent: 'center',
-    // // flex: 1,
-    //       flexDirection: 'column',
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //       width: 100,
-    //         height: 100
-  // }
 
 });
