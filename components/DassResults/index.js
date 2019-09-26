@@ -89,7 +89,7 @@ export default class DassResults extends Component {
           <View style={{flex: 1}}>
             <Text
               style={{
-                marginTop: 55,
+                marginTop: 40,
                 textAlign: 'center',
                 fontSize: 40,
               }}>
@@ -119,7 +119,6 @@ export default class DassResults extends Component {
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 10,
                     fontSize: 17,
                     fontStyle: 'italic',
                   }}>
@@ -139,7 +138,6 @@ export default class DassResults extends Component {
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 10,
                     fontSize: 17,
                     fontStyle: 'italic',
                   }}>
@@ -174,7 +172,7 @@ export default class DassResults extends Component {
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 15,
+                    marginTop: 5,
                     fontSize: 17,
                     fontStyle: 'italic',
                   }}>
@@ -194,7 +192,7 @@ export default class DassResults extends Component {
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 15,
+                    marginTop: 5,
                     fontSize: 17,
                     fontStyle: 'italic',
                   }}>
@@ -229,7 +227,7 @@ export default class DassResults extends Component {
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 15,
+                    marginTop: 5,
                     fontSize: 17,
                     fontStyle: 'italic',
                   }}>
@@ -248,7 +246,7 @@ export default class DassResults extends Component {
                 <Text
                   style={{
                     textAlign: 'center',
-                    marginTop: 15,
+                    marginTop: 5,
                     fontSize: 17,
                     fontStyle: 'italic',
                   }}>
