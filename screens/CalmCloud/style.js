@@ -56,15 +56,15 @@ export default StyleSheet.create({
     // height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column",
+    // flexDirection: "column",
     textAlign: "center"
   },
   stressText: {
     color: "black",
     fontSize: 50,
     textAlign: "center",
-    maxWidth: "80%",
-    maxHeight: "80%",
+    //maxWidth: "80%",
+    // maxHeight: "80%",
     textShadowColor: "rgba(0, 0, 0, 0.75)",
     textShadowOffset: { width: 1.5, height: 1.5 },
     textShadowRadius: 1.5

@@ -30,7 +30,7 @@ export default class CalmCloud extends Component {
     this.topTextOpacity = new Animated.Value(1);
 
     this.instructionsArr = [
-      "Now focus on your stress shrinking...",
+      "Now focus on your stress slowly shrinking...",
       "Take a deep breathe in...",
       "Now breathe out...",
       "Continue to focus on your breathing...",
