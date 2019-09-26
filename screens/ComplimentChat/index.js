@@ -107,38 +107,40 @@ render() {
   }
 
     return (
-      <View
-        style={ styles.view }>
+      <View >
+        <View style={ styles.view }>
+          <View style={{height: 300, alignItems: 'center'}} >
+            <Text style={styles.subtitleText} >(Press on Upsy to get started)</Text>
 
-        <View >
-          <Text style={styles.subtitleText} >Press on Upsy to get started</Text>
+          
+            <TouchableOpacity
+              onPress={() => {
+                this.getUpsyCompliment();
+                this.toggleModal();
+                this.animateUpsy();  // working on this function
+              }} style={ styles.upsyImg }>
 
+              <Image
+                style={ styles.upsyImg }
+                source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
+                resizeMode={'contain'}
+              />
+
+            </TouchableOpacity>
+          </View>
         </View>
-        <View >
-          <TouchableOpacity
-            onPress={() => {
-              this.getUpsyCompliment();
-              this.toggleModal();
-              this.animateUpsy();  // working on this function
-            }}>
-
-            <Image
-              style={ styles.upsyImg }
-              source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
-              resizeMode={'contain'}
-            />
-
-          </TouchableOpacity>
-        </View>
-        
         {/* MODAL START */}
-        <View >
+        {/* <View > */}
+          
+
+          {/* </View> */}
+          
+          
           <Modal 
             style={ styles.background }
 
               isVisible={this.state.isModalVisible}
 
-              swipeDirection='right'
               animationIn='slideInUp'
               animationInTiming={500}
               animationOut='slideOutDown'
@@ -147,18 +149,18 @@ render() {
               backdropOpacity={.5}
 
             >
-            <View  style={ styles.modalSpacing } >
-              <Text style={styles.text} >
-                  {this.state.compliment}
-              </Text>
-              <Button title="Done" onPress={() => {
-                this.toggleModal()
-                this.animateUpsy()
-                }}/>
-            </View>
+              {/* <View style={ styles.flexContainer}> */}
+                <View  style={ styles.modalSpacing } >
+                    <Text style={styles.text} >
+                        {this.state.compliment}
+                    </Text>
+                    <Button title="Done" onPress={() => {
+                      this.toggleModal()
+                      this.animateUpsy()
+                      }}/>
+                </View>
+            {/* </View> */}
           </Modal>
-        </View>
-
       </View>
     )
   }
