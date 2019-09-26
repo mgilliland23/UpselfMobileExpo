@@ -15,6 +15,7 @@ import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
 import StressTest from "./screens/StressTest";
+import DassResults from "./components/DassResults";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -72,7 +73,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       }
     },
 
-    Compliment: {
+    ComplimentChat: {
       screen: ComplimentChat,
 
       navigationOptions: {
@@ -120,6 +121,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
 );
 
 //Wrap the bottom tab navigator in a stack navigator to get splash screen working
+
 // const MainNavigator = createStackNavigator(
 //   {
 //     BottomBarNavigator,
@@ -140,6 +142,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
 //     gesturesEnabled: false
 //   }
 // );
+
 
 const App = createAppContainer(BottomBarNavigator);
 
