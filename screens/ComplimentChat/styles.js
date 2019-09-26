@@ -5,20 +5,17 @@ export default StyleSheet.create({
   
   view: {
     flexDirection: 'column',
-    // flex: 1,
     justifyContent: 'flex-end', 
-    // alignSelf: 'center',
-    // width: "100%",
     alignItems: 'center', // moves to middle of x-axis
-    backgroundColor: '#F46DCE30',
+    backgroundColor: '#f2f2f2',
     height: win.height
   },
 
   upsyImg: {
-    // flex: 1,
     height: 200,
     width: 200,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 20
   },
 
 
@@ -27,8 +24,7 @@ export default StyleSheet.create({
     fontSize: 20,
     width: win.width,
     textAlign: 'center',
-    color: 'black',  // make blue
-    // marginTop: 100,
+    color: 'black', 
     padding: 10,
     alignSelf: "center"
   },
@@ -36,21 +32,10 @@ export default StyleSheet.create({
   text: {
     fontSize: 30,
     color: '#F46DCE',
+    textAlign: 'center',
     // textAlign: 'center',
     // flexDirection: 'column',
     paddingBottom: 10,
-  },
-
-  background: {
-    
-    // backgroundColor: '#fff',
-    // marginTop: "50%",
-    // marginBottom: "50%",
-    // height: Dimensions.get('window').height / 2
-    // height: 200,
-    // // marginTop: '40%',
-    // // marginBottom: '40%',
-    // borderRadius: 15,
   },
 
   modalSpacing: {
@@ -63,6 +48,7 @@ export default StyleSheet.create({
     marginBottom: "auto",
     padding: 20,
     backgroundColor: '#fff',
+    borderRadius: 15
     // padding: 15
   },
 

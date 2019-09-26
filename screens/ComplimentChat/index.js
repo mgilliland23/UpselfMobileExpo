@@ -86,18 +86,6 @@ export default class ComplimentChat extends React.Component {
     }
   }
 
-  // THINGS FROM REACT NATIVE TO INCORPORATE
-  // Animated.spring()      // provides a simple spring physics model.
-  // Animated.timing()      // animates a value over time using easing functions.
-
-  // Animated.timing(
-  //   // Animate value over time
-  //   this.state.fadeAnim, // The value to drive
-  //   {
-  //     toValue: 1, // Animate to final value of 1
-  //   },
-  // ).start(); // Start the animation
-
 
 
 render() {
@@ -110,9 +98,8 @@ render() {
       <View >
         <View style={ styles.view }>
           <View style={{height: 300, alignItems: 'center'}} >
-            <Text style={styles.subtitleText} >(Press on Upsy to get started)</Text>
+            <Text style={styles.subtitleText} >Press Upsy to get started</Text>
 
-          
             <TouchableOpacity
               onPress={() => {
                 this.getUpsyCompliment();
@@ -129,37 +116,26 @@ render() {
             </TouchableOpacity>
           </View>
         </View>
+
         {/* MODAL START */}
-        {/* <View > */}
-          
-
-          {/* </View> */}
-          
-          
           <Modal 
-            style={ styles.background }
-
-              isVisible={this.state.isModalVisible}
-
-              animationIn='slideInUp'
-              animationInTiming={500}
-              animationOut='slideOutDown'
-              animationOutTiming={750}
-              backdropColor='#fff'
-              backdropOpacity={.5}
-
+            isVisible={this.state.isModalVisible}
+            animationIn='slideInUp'
+            animationInTiming={500}
+            animationOut='slideOutDown'
+            animationOutTiming={750}
+            backdropColor='#fff'
+            backdropOpacity={.5}
             >
-              {/* <View style={ styles.flexContainer}> */}
-                <View  style={ styles.modalSpacing } >
-                    <Text style={styles.text} >
-                        {this.state.compliment}
-                    </Text>
-                    <Button title="Done" onPress={() => {
-                      this.toggleModal()
-                      this.animateUpsy()
-                      }}/>
-                </View>
-            {/* </View> */}
+              <View  style={ styles.modalSpacing } >
+                  <Text style={styles.text} >
+                      {this.state.compliment}
+                  </Text>
+                  <Button title="Done" onPress={() => {
+                    this.toggleModal()
+                    this.animateUpsy()
+                    }}/>
+              </View>
           </Modal>
       </View>
     )
