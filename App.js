@@ -10,11 +10,12 @@ import React, { Fragment, Component } from "react";
 import Chat from "./screens/Chat";
 import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
-import StressInputPage from "./screens/StressInputPage";
+import StressInputPage from "./screens/CalmCloud";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
 import StressTest from "./screens/StressTest";
+import DassResults from "./components/DassResults";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -28,10 +29,10 @@ console.disableYellowBox = true;
 
 const CalmCloudNavigator = createStackNavigator(
   {
-    StressInputPage: {
-      screen: StressInputPage,
-      gesturesEnabled: false
-    },
+    // StressInputPage: {
+    //   screen: StressInputPage,
+    //   gesturesEnabled: false
+    // },
     CalmCloud: {
       screen: CalmCloud,
       gesturesEnabled: false
@@ -39,7 +40,7 @@ const CalmCloudNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "StressInputPage",
+    initialRouteName: "CalmCloud",
     navigationOptions: {
       tabBarLabel: "Calm Cloud",
       tabBarColor: "#6d8bf4",
@@ -52,10 +53,6 @@ const CalmCloudNavigator = createStackNavigator(
 //Set up routes and the navigator for the app
 const BottomBarNavigator = createMaterialBottomTabNavigator(
   {
-    // Landing: {
-    //   screen: Landing,
-    // },
-
     Chat: {
       screen: Chat,
       navigationOptions: {
@@ -124,30 +121,29 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
 );
 
 //Wrap the bottom tab navigator in a stack navigator to get splash screen working
-const MainNavigator = createStackNavigator(
-  {
-    BottomBarNavigator,
-    Splash: {
-      screen: Splash,
-      navigationOptions: {
-        tabBarVisible: false,
-        tabBarColor: "#6bccf3",
-        activeColor: "#6bccf3",
-        gesturesEnabled: false
-      }
-    },
-    StressTest: {
-      screen: StressTest,
-      navigationOptions: {
-        tabBarVisible: false,
-        tabBarColor: '#6bccf3',
-        activeColor: '#6bccf3',
-      },
-    },
-  },
-  { headerMode: "none", initialRouteName: "Splash", gesturesEnabled: false }
-);
 
-const App = createAppContainer(MainNavigator);
+// const MainNavigator = createStackNavigator(
+//   {
+//     BottomBarNavigator,
+//     // Splash: {
+//     //   screen: Splash,
+//     //   navigationOptions: {
+//     //     tabBarVisible: false,
+//     //     tabBarColor: "#6bccf3",
+//     //     activeColor: "#6bccf3",
+//     //     gesturesEnabled: false
+//     //   }
+//     // },
+
+//   },
+//   {
+//     headerMode: "none",
+//     initialRouteName: "BottomBarNavigator",
+//     gesturesEnabled: false
+//   }
+// );
+
+
+const App = createAppContainer(BottomBarNavigator);
 
 export default App;
