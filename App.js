@@ -90,7 +90,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarLabel: "Arcade",
         tabBarColor: "#936df4",
         activeColor: "#fff",
-        tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+        tabBarIcon: <EnIcon name="star" size={22} color="#fff" />
       }
     },
 
