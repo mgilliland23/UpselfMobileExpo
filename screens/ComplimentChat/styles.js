@@ -5,50 +5,48 @@ export default StyleSheet.create({
   
   view: {
     flexDirection: 'column',
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    backgroundColor: '#F46DCE30',
+    justifyContent: 'flex-end', 
+    alignItems: 'center', // moves to middle of x-axis
+    backgroundColor: '#f2f2f2',
+    height: win.height
   },
 
   upsyImg: {
-    height: 300,
+    height: 200,
+    width: 200,
     justifyContent: 'center',
+    marginBottom: 20
   },
 
 
   subtitleText: {
+    flex: 3,
     fontSize: 20,
+    width: win.width,
     textAlign: 'center',
-    color: '#F46DCE',
-    marginTop: 100,
+    color: 'black', 
     padding: 10,
+    alignSelf: "center"
   },
 
   text: {
     fontSize: 30,
     color: '#F46DCE',
     textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-
-  background: {
-    height: 50,
-    backgroundColor: 'white',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 350,
-    marginBottom: 250,
-    borderRadius: 15,
+    paddingBottom: 20,
   },
 
   modalSpacing: {
+    flex: 0,
     flexDirection: 'column',
-    flex: 1,
-    justifyContent: 'space-around',
-    padding: 15
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 200, // or change the %
+    marginBottom: "auto",
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 15
+  },
 
 });
