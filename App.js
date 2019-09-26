@@ -15,6 +15,7 @@ import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
 import StressTest from "./screens/StressTest";
+import DassResults from "./components/DassResults";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -136,8 +137,16 @@ const MainNavigator = createStackNavigator(
         gesturesEnabled: false
       }
     },
-    StressTest: {
-      screen: StressTest,
+    // StressTest: {
+    //   screen: StressTest,
+    //   navigationOptions: {
+    //     tabBarVisible: false,
+    //     tabBarColor: '#6bccf3',
+    //     activeColor: '#6bccf3',
+    //   },
+    // },
+    DassResults: {
+      screen: DassResults,
       navigationOptions: {
         tabBarVisible: false,
         tabBarColor: '#6bccf3',
