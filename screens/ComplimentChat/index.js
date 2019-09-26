@@ -89,10 +89,6 @@ export default class ComplimentChat extends React.Component {
 
 
 render() {
-  // const isModalVisible = this.state.isModalVisible;
-  // if (isModalVisible) {
-  //   modal = <ComplimentCard compliment={this.state.compliment} />
-  // }
 
     return (
       <TouchableOpacity
