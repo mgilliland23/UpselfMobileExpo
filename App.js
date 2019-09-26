@@ -10,10 +10,11 @@ import React, { Fragment, Component } from "react";
 import Chat from "./screens/Chat";
 import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
-import StressInputPage from "./screens/StressInputPage";
+import StressInputPage from "./screens/CalmCloud";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
 import Splash from "./screens/SplashScreen";
+import StressTest from "./screens/StressTest";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -27,10 +28,10 @@ console.disableYellowBox = true;
 
 const CalmCloudNavigator = createStackNavigator(
   {
-    StressInputPage: {
-      screen: StressInputPage,
-      gesturesEnabled: false
-    },
+    // StressInputPage: {
+    //   screen: StressInputPage,
+    //   gesturesEnabled: false
+    // },
     CalmCloud: {
       screen: CalmCloud,
       gesturesEnabled: false
@@ -38,7 +39,7 @@ const CalmCloudNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "StressInputPage",
+    initialRouteName: "CalmCloud",
     navigationOptions: {
       tabBarLabel: "Calm Cloud",
       tabBarColor: "#6d8bf4",
@@ -51,10 +52,6 @@ const CalmCloudNavigator = createStackNavigator(
 //Set up routes and the navigator for the app
 const BottomBarNavigator = createMaterialBottomTabNavigator(
   {
-    // Landing: {
-    //   screen: Landing,
-    // },
-
     Chat: {
       screen: Chat,
       navigationOptions: {
@@ -86,6 +83,17 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       }
     },
 
+    StressTest: {
+      screen: StressTest,
+
+      navigationOptions: {
+        tabBarLabel: "StressTest",
+        tabBarColor: "#f46d8b",
+        activeColor: "#fff",
+        tabBarIcon: <Icon name="question" size={22} color="#fff" />
+      }
+    },
+
     CalmCloud: CalmCloudNavigator,
 
     Menu: {
@@ -112,22 +120,27 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
 );
 
 //Wrap the bottom tab navigator in a stack navigator to get splash screen working
-const MainNavigator = createStackNavigator(
-  {
-    BottomBarNavigator,
-    Splash: {
-      screen: Splash,
-      navigationOptions: {
-        tabBarVisible: false,
-        tabBarColor: "#6bccf3",
-        activeColor: "#6bccf3",
-        gesturesEnabled: false
-      }
-    }
-  },
-  { headerMode: "none", initialRouteName: "Splash", gesturesEnabled: false }
-);
+// const MainNavigator = createStackNavigator(
+//   {
+//     BottomBarNavigator,
+//     // Splash: {
+//     //   screen: Splash,
+//     //   navigationOptions: {
+//     //     tabBarVisible: false,
+//     //     tabBarColor: "#6bccf3",
+//     //     activeColor: "#6bccf3",
+//     //     gesturesEnabled: false
+//     //   }
+//     // },
 
-const App = createAppContainer(MainNavigator);
+//   },
+//   {
+//     headerMode: "none",
+//     initialRouteName: "BottomBarNavigator",
+//     gesturesEnabled: false
+//   }
+// );
+
+const App = createAppContainer(BottomBarNavigator);
 
 export default App;
