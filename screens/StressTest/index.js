@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     marginLeft: '3%',
     justifyContent: 'center',
     alignSelf: 'center',
-    // backgroundColor: 'yellow',
   },
   questionContainer: {
     flex: 1,
@@ -66,24 +65,11 @@ export default class StressTest extends Component {
       anxietyCount: 0,
       stressCount: 0,
       questionAnswered: 0,
-      buttonClicked: false,
+      // buttonClicked: false,
       buttonCol: ['#6bccf3', '#936df4', '#6d8bf4', '#6de5f4'],
-      showResultsModal: false,
+      // showResultsModal: false,
     };
     this.handleResponse = this.handleResponse.bind(this);
-  }
-
-  // Reset States once results modal pops up
-  resetStates() {
-    setTimeout(() => {
-      this.setState({
-        questionIndex: 0,
-        depressionCount: 0,
-        anxietyCount: 0,
-        stressCount: 0,
-        buttonClicked: false,
-      });
-    }, 500);
   }
 
   // Button Colors
@@ -124,6 +110,7 @@ export default class StressTest extends Component {
                   );
                   if (this.state.questionAnswered === dassQuestions.length) {
                     this.getResults();
+                    this.resetStates();
                   }
                 },
               );
@@ -137,6 +124,7 @@ export default class StressTest extends Component {
                   console.info('anxietyCount: ' + this.state.anxietyCount);
                   if (this.state.questionAnswered === dassQuestions.length) {
                     this.getResults();
+                    this.resetStates();
                   }
                 },
               );
@@ -150,6 +138,7 @@ export default class StressTest extends Component {
                   console.info('stressCount: ' + this.state.stressCount);
                   if (this.state.questionAnswered === dassQuestions.length) {
                     this.getResults();
+                    this.resetStates();
                   }
                 },
               );
@@ -162,6 +151,18 @@ export default class StressTest extends Component {
         }
       },
     );
+  }
+
+  // Function to reset all states
+  resetStates = () => {
+    this.setState({
+      questionIndex: 0,
+      depressionCount: 0,
+      anxietyCount: 0,
+      stressCount: 0,
+      questionAnswered: 0,
+      buttonCol: ['#6bccf3', '#936df4', '#6d8bf4', '#6de5f4'],
+    })
   }
 
   // Calculate results

@@ -69,6 +69,12 @@ export default class DassResults extends Component {
     }
   };
 
+  allNormal = (dValue, aValue, sValue) => {
+      if (dValue && aValue && sValue === 'Normal') {
+          return 'Normal'  
+      }
+  };
+
   render() {
     const {navigation} = this.props;
     const depressionCount = navigation.getParam('depressionCount', 0);
@@ -99,7 +105,7 @@ export default class DassResults extends Component {
           <View
             style={{
               flex: 2,
-              backgroundColor: '#6DCEF470',
+            //   backgroundColor: '#6DCEF470',
               marginTop: 30,
             }}>
             <View style={{marginTop: 10}}>
@@ -154,7 +160,7 @@ export default class DassResults extends Component {
           <View
             style={{
               flex: 2,
-              backgroundColor: '#6DCEF440',
+            //   backgroundColor: '#6DCEF440',
             }}>
             <View style={{marginTop: 10}}>
               <Text
@@ -209,7 +215,7 @@ export default class DassResults extends Component {
           <View
             style={{
               flex: 2,
-              backgroundColor: '#6DCEF430',
+            //   backgroundColor: '#6DCEF430',
             }}>
             <View style={{marginTop: 10}}>
               <Text
@@ -261,21 +267,34 @@ export default class DassResults extends Component {
             )}
           </View>
           <View style={{flex: 1, justifyContent: 'center'}}>
-            <TouchableOpacity
-              style={{
-                marginLeft: 150,
-                marginRight: 150,
-              }}
-              onPress={() => this.props.navigation.navigate('Menu')}>
-              <Text
+          {/* {this.allNormal(depressionCount, anxietyCount, stressCount) === 'Normal' && (
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    marginTop: 5,
+                    fontSize: 17,
+                    fontStyle: 'italic',
+                  }}>
+                  Enter the Arcade Room!
+                </Text>
+            )} */}
+            <View>
+                <TouchableOpacity
                 style={{
-                  fontWeight: 'bold',
-                  fontSize: 20,
-                  textAlign: 'center',
-                }}>
-                OK
-              </Text>
-            </TouchableOpacity>
+                    marginLeft: 150,
+                    marginRight: 150,
+                }}
+                onPress={() => this.props.navigation.navigate('Menu')}>
+                <Text
+                    style={{
+                    fontWeight: 'bold',
+                    fontSize: 20,
+                    textAlign: 'center',
+                    }}>
+                    OK
+                </Text>
+                </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
