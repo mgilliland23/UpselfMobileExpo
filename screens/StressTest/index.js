@@ -9,10 +9,11 @@ import {
   Dimensions,
   TouchableOpacity,
   Animated,
+  Modal,
 } from 'react-native';
 import dassQuestions from './questions';
 import DassResponse from '../../components/DassResponse';
-// import DassResults from '../../components/DassResults';
+import DassResults from '../../components/DassResults';
 
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -42,10 +43,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
   },
-  question: {fontSize: 20, textAlign: 'center'}
+  upsyImg: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  question: {fontSize: 20, textAlign: 'center'},
 });
 
 export default class StressTest extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+
   // Set State
   constructor(props) {
     super(props);
@@ -54,78 +65,415 @@ export default class StressTest extends Component {
       depressionCount: 0,
       anxietyCount: 0,
       stressCount: 0,
+      questionAnswered: 0,
       buttonClicked: false,
-      // buttonCol: ['#6bccf3', '#936df4', '#6d8bf4', '#6de5f4'],
-      // showModal: false,
+      buttonCol: ['#6bccf3', '#936df4', '#6d8bf4', '#6de5f4'],
+      showResultsModal: false,
     };
     this.handleResponse = this.handleResponse.bind(this);
   }
 
+  // Reset States once results modal pops up
+  resetStates() {
+    setTimeout(() => {
+      this.setState({
+        questionIndex: 0,
+        depressionCount: 0,
+        anxietyCount: 0,
+        stressCount: 0,
+        buttonClicked: false,
+      });
+    }, 500);
+  }
+
+  // Button Colors
+  // changeBtnCol() {
+  //   var firstCol = this.buttonCol.shift();
+  //   console.info(firstCol);
+  //   this.buttonCol.push(firstCol);
+  //   console.info(this.buttonCol);
+  //   this.setState({
+  //     buttonCol: this.buttonCol,
+  //   });
+  // }
+
   // Handle User Response
   handleResponse(dassValue) {
     console.info("I'm being clicked");
-
-    if (!this.state.buttonClicked) {
-      
-    }
-
-    console.info('Before state: ' + this.state.questionIndex);
-    // Check for # of questions
-    if (this.state.questionIndex < Object.keys(dassQuestions).length - 1) {
-      this.setState({
-        questionIndex: this.state.questionIndex + 1,
-      });
-      // Determine DAS and add to each counter
-      switch (dassQuestions[this.state.questionIndex].das) {
-        case 'd':
+    this.setState(
+      {
+        questionAnswered: this.state.questionAnswered + 1,
+      },
+      () => {
+        if (this.state.questionIndex < dassQuestions.length) {
+          console.info('Click Number:' + this.state.questionAnswered);
+          // Increment index of array
           this.setState({
-            depressionCount: this.state.depressionCount + dassValue,
+            questionIndex: this.state.questionIndex + 1,
           });
-          break;
-        case 'a':
-          this.setState({
-            anxietyCount: this.state.anxietyCount + dassValue,
-          });
-          break;
-        case 's':
-          this.setState({
-            stressCount: this.state.stressCount + dassValue,
-          });
-          break;
-      }
-      console.info('depressionCount: ' + this.state.depressionCount);
-      console.info('anxietyCount: ' + this.state.anxietyCount);
-      console.info('stressCount: ' + this.state.stressCount);
-
-      // Change button colors
-    //   this.changeBtnCol();
-    } else {
-      // If all questions are answered, double counts and get results
-      this.setState({
-        depressionCount: this.state.depressionCount * 2,
-        anxietyCount: this.state.anxietyCount * 2,
-        stressCount: this.state.stressCount * 2,
-      });
-      this.getResults();
-    }
+          // Determine DAS and add to each counter
+          switch (dassQuestions[this.state.questionIndex].das) {
+            case 'd':
+              this.setState(
+                {
+                  depressionCount: this.state.depressionCount + dassValue,
+                },
+                () => {
+                  console.info(
+                    'depressionCount: ' + this.state.depressionCount,
+                  );
+                  if (this.state.questionAnswered === dassQuestions.length) {
+                    this.getResults();
+                  }
+                },
+              );
+              break;
+            case 'a':
+              this.setState(
+                {
+                  anxietyCount: this.state.anxietyCount + dassValue,
+                },
+                () => {
+                  console.info('anxietyCount: ' + this.state.anxietyCount);
+                  if (this.state.questionAnswered === dassQuestions.length) {
+                    this.getResults();
+                  }
+                },
+              );
+              break;
+            case 's':
+              this.setState(
+                {
+                  stressCount: this.state.stressCount + dassValue,
+                },
+                () => {
+                  console.info('stressCount: ' + this.state.stressCount);
+                  if (this.state.questionAnswered === dassQuestions.length) {
+                    this.getResults();
+                  }
+                },
+              );
+              break;
+          }
+          // Change button colors
+          // this.changeBtnCol();
+        } else {
+          console.info('ELSE');
+        }
+      },
+    );
   }
-  // Button Colors
-  // changeBtnCol() {
-  // }
 
   // Calculate results
   getResults() {
-    console.info('double results for depressionCount: ' + this.state.depressionCount);
-    console.info('double results for anxietyCount: ' + this.state.anxietyCount);
-    console.info('double results for stressCount: ' + this.state.stressCount);
+    this.setState(
+      {
+        // If all questions are answered, double counts and get results
+        depressionCount: this.state.depressionCount * 2,
+        anxietyCount: this.state.anxietyCount * 2,
+        stressCount: this.state.stressCount * 2,
+      },
+      () => {
+        this.setState({
+          showResultsModal: true,
+        });
+        console.info(
+          'double results for depressionCount: ' + this.state.depressionCount,
+        );
+        console.info(
+          'double results for anxietyCount: ' + this.state.anxietyCount,
+        );
+        console.info(
+          'double results for stressCount: ' + this.state.stressCount,
+        );
+        // Reset all states // LOOK INTO THIS
+        this.resetStates();
+      },
+    );
   }
 
+  // Depression Count
+  calculateDepressionTotal = value => {
+    if (value <= 9) {
+      return 'Normal';
+    } else if (value >= 10 && value <= 13) {
+      return 'Mild';
+    } else if (value >= 14 && value <= 20) {
+      return 'Moderate';
+    } else if (value >= 21 && value <= 27) {
+      return 'Severe';
+    } else {
+      return 'Extremely Severe';
+    }
+  };
+
+  // Anxiety Count
+  calculateAnxietyTotal = value => {
+    if (value <= 7) {
+      return 'Normal';
+    } else if (value >= 8 && value <= 9) {
+      return 'Mild';
+    } else if (value >= 10 && value <= 14) {
+      return 'Moderate';
+    } else if (value >= 15 && value <= 19) {
+      return 'Severe';
+    } else {
+      return 'Extremely Severe';
+    }
+  };
+
+  // Stress Count
+  calculateStressTotal = value => {
+    if (value <= 14) {
+      return 'Normal';
+    } else if (value >= 15 && value <= 18) {
+      return 'Mild';
+    } else if (value >= 19 && value <= 25) {
+      return 'Moderate';
+    } else if (value >= 26 && value <= 33) {
+      return 'Severe';
+    } else {
+      return 'Extremely Severe';
+    }
+  };
+
+  // Direct to Upsy
+  // renderButton = result => {
+  //   switch (result) {
+  //     case 'Normal':
+  //       return null;
+  //     case 'Mild':
+  //       return null;
+  //     case 'Moderate':
+  //       return 'Upsy';
+  //     case 'Severe':
+  //       return 'Upsy';
+  //     case 'Extremely Severe':
+  //       return 'Upsy';
+  //   }
+  // };
+
   render() {
-    console.log(dassQuestions[this.state.questionIndex].question);
+    // console.log(dassQuestions[this.state.questionIndex].question);
     console.log(Object.keys(dassQuestions).length);
 
     return (
       <View style={styles.background}>
+        <Modal
+          visible={this.state.showResultsModal}
+          animationType="slide"
+          onRequestClose={() => console.info('this is a close req')}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+            }}>
+            <View style={{flex: 1}}>
+              <Text
+                style={{
+                  marginTop: 55,
+                  textAlign: 'center',
+                  fontSize: 40,
+                }}>
+                DAS RESULTS
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 2,
+                backgroundColor: '#6DCEF470',
+                marginTop: 30,
+              }}>
+              <View style={{marginTop:10}}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontSize: 25,
+                    fontWeight: 'bold',
+                  }}>
+                  Depression Scale:{' '}
+                  {this.calculateDepressionTotal(this.state.depressionCount)}
+                </Text>
+              </View>
+              {this.calculateDepressionTotal(this.state.depressionCount) ===
+                'Severe' && (
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Chat')}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 10,
+                      fontSize: 17,
+                      fontStyle: 'italic',
+                    }}>
+                    Talk about it with Upsy
+                  </Text>
+                  <ImageBackground
+                    style={styles.upsyImg}
+                    source={require('../../assets/images/menu_icons/chat.png')}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              )}
+              {this.calculateDepressionTotal(this.state.depressionCount) ===
+                'Extremely Severe' && (
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Chat')}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 10,
+                      fontSize: 17,
+                      fontStyle: 'italic',
+                    }}>
+                    Talk about it with Upsy
+                  </Text>
+                  <ImageBackground
+                    style={styles.upsyImg}
+                    source={require('../../assets/images/menu_icons/chat.png')}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View
+              style={{
+                flex: 2,
+                backgroundColor: '#6DCEF440',
+              }}>
+              <View style={{marginTop:10}}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontSize: 25,
+                    fontWeight: 'bold',
+                  }}>
+                  Anxiety Scale:{' '}
+                  {this.calculateAnxietyTotal(this.state.anxietyCount)}
+                </Text>
+              </View>
+              {this.calculateAnxietyTotal(this.state.anxietyCount) ===
+                'Severe' && (
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('CalmCloud')}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 15,
+                      fontSize: 17,
+                      fontStyle: 'italic',
+                    }}>
+                    Check out our CalmCloud Exercise
+                  </Text>
+                  <ImageBackground
+                    style={styles.upsyImg}
+                    source={require('../../assets/images/menu_icons/calmcloud.png')}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              )}
+              {this.calculateAnxietyTotal(this.state.anxietyCount) ===
+                'Extremely Severe' && (
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('CalmCloud')}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 15,
+                      fontSize: 17,
+                      fontStyle: 'italic',
+                    }}>
+                    Check out our CalmCloud Exercise
+                  </Text>
+                  <ImageBackground
+                    style={styles.upsyImg}
+                    source={require('../../assets/images/menu_icons/calmcloud.png')}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View
+              style={{
+                flex: 2,
+                backgroundColor: '#6DCEF430',
+              }}>
+              <View style={{marginTop:10}}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontSize: 25,
+                    fontWeight: 'bold',
+                  }}>
+                  Stress Scale:{' '}
+                  {this.calculateStressTotal(this.state.stressCount)}
+                </Text>
+              </View>
+              {this.calculateStressTotal(this.state.stressCount) ===
+                'Severe' && (
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Memory')}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 15,
+                      fontSize: 17,
+                      fontStyle: 'italic',
+                    }}>
+                    Enter the Arcade Room!
+                  </Text>
+                  <ImageBackground
+                    style={styles.upsyImg}
+                    source={require('../../assets/images/menu_icons/arcade.png')}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              )}
+              {this.calculateStressTotal(this.state.stressCount) ===
+                'Extremely Severe' && (
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('Memory')}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 15,
+                      fontSize: 17,
+                      fontStyle: 'italic',
+                    }}>
+                    Enter the Arcade Room!
+                  </Text>
+                  <ImageBackground
+                    style={styles.upsyImg}
+                    source={require('../../assets/images/menu_icons/arcade.png')}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <TouchableOpacity
+                style={{
+                  marginLeft: 150,
+                  marginRight: 150,
+                }}
+                onPress={() => {
+                  this.setState({
+                    showResultsModal: false,
+                  });
+                }}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 20,
+                    textAlign: 'center',
+                  }}>
+                  OK
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
         <View style={{flex: 1, justifyContent: 'center'}}>
           <View style={{flex: 1, justifyContent: 'center'}}>
             <ImageBackground
@@ -135,11 +483,19 @@ export default class StressTest extends Component {
               width="95%">
               <View style={styles.questionContainer}>
                 <Text
-                  style={{fontWeight: 'bold', paddingBottom: 5, marginLeft: 50, fontSize: 17, width: 300}}>
+                  style={{
+                    fontWeight: 'bold',
+                    paddingBottom: 5,
+                    marginLeft: 50,
+                    fontSize: 17,
+                    width: 300,
+                  }}>
                   How relevant is this statement?
                 </Text>
                 <Text style={styles.question}>
-                  {dassQuestions[this.state.questionIndex].question}
+                  {dassQuestions[this.state.questionIndex]
+                    ? dassQuestions[this.state.questionIndex].question
+                    : null}
                 </Text>
               </View>
             </ImageBackground>
@@ -148,7 +504,10 @@ export default class StressTest extends Component {
         <View />
         <View style={{flex: 1, justifyContent: 'center', marginBottom: '10%'}}>
           <View>
-            <DassResponse buttonCol={this.state.buttonCol[0]} handleResponse={this.handleResponse} />
+            <DassResponse
+              buttonCol={this.state.buttonCol[0]}
+              handleResponse={this.handleResponse}
+            />
           </View>
         </View>
       </View>

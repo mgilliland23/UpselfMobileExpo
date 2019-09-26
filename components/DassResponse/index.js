@@ -26,29 +26,29 @@ const styles = StyleSheet.create({
 
 export default class DassResponse extends Component {
   render() {
-    // console.info(this.props.buttonCol[0]);
+    console.info(this.props.buttonCol[0]);
     return (
       <View>
-       <View style={styles.buttonContainer}>
+        <View style={styles.buttonContainer}>
           <TouchableOpacity
-            // style={[styles.buttons, {backgroundColor: 'white'}]}
-            style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
+            style={[styles.buttons, {backgroundColor: this.props.buttonCol}]}
+            // style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
             onPress={() => this.props.handleResponse(0)}>
             <Text style={styles.responseText}>Does not apply to me at all</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            // style={[styles.buttons, {backgroundColor: 'white'}]}
-            style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
+            style={[styles.buttons, {backgroundColor: this.props.buttonCol}]}
+            // style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
             onPress={() => this.props.handleResponse(1)}>
             <Text style={styles.responseText}>Applies to me sometimes</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            // style={[styles.buttons, {backgroundColor: 'white'}]}
-            style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
+            style={[styles.buttons, {backgroundColor: this.props.buttonCol}]}
+            // style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
             onPress={() => this.props.handleResponse(2)}>
             <Text style={styles.responseText}>
               Applies to me a good amount of time
@@ -57,14 +57,16 @@ export default class DassResponse extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            // style={[styles.buttons, {backgroundColor: 'white'}]}
-            style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
+            style={[styles.buttons, {backgroundColor: this.props.buttonCol}]}
+            // style={[styles.buttons, {backgroundColor: '#6d8bf4'}]}
             onPress={() => this.props.handleResponse(3)}>
             <Text style={styles.responseText}>
               Applies to me most of the time
             </Text>
           </TouchableOpacity>
         </View>
+        {/* { this.state.buttonClicked ? <View/> :  */}
+        {/* } */}
       </View>
     );
   }
