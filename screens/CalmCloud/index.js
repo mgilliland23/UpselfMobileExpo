@@ -19,6 +19,8 @@ import styles from "./style.js";
 const win = Dimensions.get("window");
 
 export default class CalmCloud extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     //Prop to hold the animation value of the stressballs height and width
@@ -53,6 +55,12 @@ export default class CalmCloud extends Component {
       fontWeight: "bold"
     }
   };
+  componentDidMount() {
+    _isMounted = true;
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   handleStressBallAnimation = () => {
     //Set this state to start rendering the floating clouds
@@ -159,7 +167,9 @@ export default class CalmCloud extends Component {
       />
     );
     let goButton;
-    if (this.state.inputValue) {
+    const inputText = this.state.inputValue;
+
+    if (inputText && inputText.length > 2) {
       goButton = (
         <Button
           style={styles.button}
