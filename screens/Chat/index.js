@@ -1,12 +1,9 @@
 import React from "react";
-import { StyleSheet, KeyboardAvoidingView, View, Image  } from "react-native";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import API from "../../utils/API";
 
 import logo from "../../assets/images/check/check1.png";
-// import dots from "../../assets/images/chat_dots/Message-1s-200px.gif"
-import dots from "../../assets/images/circle.png"
-
 
 const styles = StyleSheet.create({
   chat: {
@@ -20,8 +17,7 @@ export default class Chat extends React.Component {
   }
 
   state = {
-    messages: [],
-    isTyping: false,
+    messages: []
   };
 
   //Set initial state for when chat is first started
@@ -35,8 +31,7 @@ export default class Chat extends React.Component {
           user: {
             _id: 2,
             name: "Upsy",
-            avatar: logo,
-            image: dots
+            avatar: logo
           }
         }
       ]
@@ -58,15 +53,12 @@ export default class Chat extends React.Component {
           user: {
             _id: 2,
             name: "Upsy",
-            avatar: logo,
-            image: dots
+            avatar: logo
           }
           // Any additional custom parameters are passed through
         };
         console.log(upsyMessage);
         //Append Upsy's message to the chat
-
-        
         this.setState(previousState => ({
           messages: GiftedChat.append(previousState.messages, upsyMessage)
         }));
@@ -75,50 +67,23 @@ export default class Chat extends React.Component {
     );
   };
 
-  renderMessageImage = (image) => {
-    console.log('renderMessageImage function!')
-    return (
-      <Image source={require('../../assets/images/circle.png')}/>
-    )
-    
-    
-  }
-
   //Handle when a user sends a new message
   onSend(messages = []) {
-    console.log(messages)
-    
-    // display someting on the screen temporarily
-    this.setState(previousState => ({
-      message: GiftedChat.append(previousState.message, this.renderMessageImage())
-    }));
-    
-
-    async function wait(ms) { 
-      return new Promise(resolve => {
-
-        // Append user's message to the chat
-          this.setState(
-            previousState => ({
-              messages: GiftedChat.append(previousState.messages, messages)
-            }),
-            () => {
-              //Get response from Upsy
-              this.getUpsyResponse();
-            }
-          );
-
-        setTimeout(resolve, 1000);
-      });
-    }
-
-    
+    // Append user's message to the chat
+    this.setState(
+      previousState => ({
+        messages: GiftedChat.append(previousState.messages, messages)
+      }),
+      () => {
+        //Get response from Upsy
+        this.getUpsyResponse();
+      }
+    );
   }
 
   render() {
     return (
       <GiftedChat
-        // renderMessageImage={() => <Image />}
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
         user={{
