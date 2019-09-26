@@ -113,7 +113,7 @@ export default class DassResults extends Component {
                 {this.calculateDepressionTotal(depressionCount)}
               </Text>
             </View>
-            {this.calculateDepressionTotal(depressionCount) === 'Normal' && (
+            {this.calculateDepressionTotal(depressionCount) === 'Severe' && (
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Chat')}>
                 <Text
