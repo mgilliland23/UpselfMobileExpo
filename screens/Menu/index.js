@@ -13,9 +13,17 @@ import {
 } from "react-native";
 import Swiper from "react-native-swiper";
 // import {Col, Row, Grid} from 'react-native-easy-grid';
+import { AppLoading, SplashScreen } from "expo";
+import { Asset } from "expo-asset";
 
 const win = Dimensions.get("window");
 const styles = StyleSheet.create({
+  navItem: {
+    flexDirection: "column",
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  },
   background: {
     flex: 1,
     width: win.width,
@@ -62,9 +70,31 @@ const styles = StyleSheet.create({
 });
 
 export default class Menu extends Component {
-  static navigationOptions = {
-    header: null
-  };
+  state = { areResourcesReady: false };
+
+  constructor(props) {
+    super(props);
+    SplashScreen.preventAutoHide(); // Instruct SplashScreen not to hide yet
+  }
+
+  componentDidMount() {
+    this.cacheResourcesAsync() // ask for resources
+      .then(() => this.setState({ areResourcesReady: true })) // mark resources as loaded
+      .catch(error =>
+        console.error(`Unexpected error thrown when loading: ${error.stack}`)
+      );
+  }
+
+  async cacheResourcesAsync() {
+    const images = [
+      require("../../assets/images/menu_icons/logo_upself_text.png"),
+      require("../../assets/images/menu_icons/compliments.png")
+    ];
+    const cacheImages = images.map(image =>
+      Asset.fromModule(image).downloadAsync()
+    );
+    return Promise.all(cacheImages);
+  }
 
   render() {
     return (
@@ -88,15 +118,7 @@ export default class Menu extends Component {
             showsPagination={true}
             // showsButtons={true}
           >
-            <View
-              style={{
-                flexDirection: "column",
-                flex: 1,
-                justifyContent: "space-evenly",
-                alignItems: "center"
-                // backgroundColor: '#F46DCE30',
-              }}
-            >
+            <View style={styles.navItem}>
               <View>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate("Chat")}
@@ -105,6 +127,12 @@ export default class Menu extends Component {
                     style={styles.upsyImg}
                     source={require("../../assets/images/menu_icons/chat.png")}
                     resizeMode={"contain"}
+                    onLoadEnd={() => {
+                      // wait for image's content to fully load [`Image#onLoadEnd`] (https://facebook.github.io/react-native/docs/image#onloadend)
+                      console.log("Image#onLoadEnd: hiding SplashScreen");
+                      SplashScreen.hide(); // Image is fully presented, instruct SplashScreen to hide
+                    }}
+                    fadeDuration={0} // we need to adjust Android devices (https://facebook.github.io/react-native/docs/image#fadeduration) fadeDuration prop to `0` as it's default value is `300`
                   />
                 </TouchableOpacity>
               </View>
@@ -115,15 +143,7 @@ export default class Menu extends Component {
                 </Text>
               </View>
             </View>
-            <View
-              style={{
-                flexDirection: "column",
-                flex: 1,
-                justifyContent: "space-evenly",
-                alignItems: "center"
-                // backgroundColor: '#6DCEF430',
-              }}
-            >
+            <View style={styles.navItem}>
               <View>
                 <TouchableOpacity
                   onPress={() =>
@@ -144,15 +164,7 @@ export default class Menu extends Component {
                 </Text>
               </View>
             </View>
-            <View
-              style={{
-                flexDirection: "column",
-                flex: 1,
-                justifyContent: "space-evenly",
-                alignItems: "center"
-                // backgroundColor: '#F46DCE30',
-              }}
-            >
+            <View style={styles.navItem}>
               <View>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate("CalmCloud")}
@@ -171,15 +183,7 @@ export default class Menu extends Component {
                 </Text>
               </View>
             </View>
-            <View
-              style={{
-                flexDirection: "column",
-                flex: 1,
-                justifyContent: "space-evenly",
-                alignItems: "center"
-                // backgroundColor: '#6DCEF430',
-              }}
-            >
+            <View style={styles.navItem}>
               <View>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate("Memory")}
@@ -196,15 +200,7 @@ export default class Menu extends Component {
                 <Text style={styles.getStartedText}>Let's play!</Text>
               </View>
             </View>
-            <View
-              style={{
-                flexDirection: "column",
-                flex: 1,
-                justifyContent: "space-evenly",
-                alignItems: "center"
-                // backgroundColor: '#F46DCE30',
-              }}
-            >
+            <View style={styles.navItem}>
               <View>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate("StressTest")}
@@ -221,15 +217,7 @@ export default class Menu extends Component {
                 <Text style={styles.getStartedText}>How stressed are you?</Text>
               </View>
             </View>
-            <View
-              style={{
-                flexDirection: "column",
-                flex: 1,
-                justifyContent: "space-evenly",
-                alignItems: "center"
-                // backgroundColor: '#6DCEF430',
-              }}
-            >
+            <View style={styles.navItem}>
               <View>
                 <TouchableOpacity
                   onPress={() => {
