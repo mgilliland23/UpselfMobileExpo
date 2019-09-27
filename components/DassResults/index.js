@@ -134,7 +134,7 @@ export default class DassResults extends Component {
 
           <Text style={{
             flex: 0.1,
-            fontSize: 35
+            fontSize: 30,
           }}>
             DAS Test Results
 
@@ -193,7 +193,7 @@ export default class DassResults extends Component {
 
           <View
             style={{
-              flex: 0.4,
+              flex: 0.5,
               flexDirection: 'row',
               aligntext: "center",
               alignItems: "center",
