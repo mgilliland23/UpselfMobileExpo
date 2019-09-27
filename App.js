@@ -10,10 +10,8 @@ import React, { Fragment, Component } from "react";
 import Chat from "./screens/Chat";
 import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
-import StressInputPage from "./screens/StressInputPage";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
-import Splash from "./screens/SplashScreen";
 import StressTest from "./screens/StressTest";
 import DassResults from "./components/DassResults";
 import { createAppContainer } from "react-navigation";
@@ -29,10 +27,10 @@ console.disableYellowBox = true;
 
 const CalmCloudNavigator = createStackNavigator(
   {
-    StressInputPage: {
-      screen: StressInputPage,
-      gesturesEnabled: false
-    },
+    // StressInputPage: {
+    //   screen: StressInputPage,
+    //   gesturesEnabled: false
+    // },
     CalmCloud: {
       screen: CalmCloud,
       gesturesEnabled: false
@@ -40,7 +38,7 @@ const CalmCloudNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "StressInputPage",
+    initialRouteName: "CalmCloud",
     navigationOptions: {
       tabBarLabel: "Calm Cloud",
       tabBarColor: "#6d8bf4",
@@ -50,13 +48,32 @@ const CalmCloudNavigator = createStackNavigator(
   }
 );
 
+const StressTestNavigator = createStackNavigator(
+  {
+    StressTest: {
+      screen: StressTest,
+      gesturesEnabled: false
+    },
+    DassResults: {
+      screen: DassResults,
+      gesturesEnabled: false
+    }
+  },
+  {
+    headerMode: "none",
+    initialRouteName: "DassResults",
+    navigationOptions: {
+      tabBarLabel: "Calm Cloud",
+      tabBarColor: "#6d8bf4",
+      activeColor: "#fff",
+      tabBarIcon: <EnIcon name="test" size={22} color="#fff" />
+    }
+  }
+);
+
 //Set up routes and the navigator for the app
 const BottomBarNavigator = createMaterialBottomTabNavigator(
   {
-    // Landing: {
-    //   screen: Landing,
-    // },
-
     Chat: {
       screen: Chat,
       navigationOptions: {
@@ -73,7 +90,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarLabel: "Arcade",
         tabBarColor: "#936df4",
         activeColor: "#fff",
-        tabBarIcon: <Icon name="brain" size={22} color="#fff" />
+        tabBarIcon: <EnIcon name="star" size={22} color="#fff" />
       }
     },
 
@@ -84,20 +101,11 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarLabel: "Compliment",
         tabBarColor: "#FF5733",
         activeColor: "#fff",
-        tabBarIcon: <Icon name="heart" size={22} color="#fff" />
+        tabBarIcon: <EnIcon name="heart" size={22} color="#fff" />
       }
     },
 
-    StressTest: {
-      screen: StressTest,
-
-      navigationOptions: {
-        tabBarLabel: "StressTest",
-        tabBarColor: "#f46d8b",
-        activeColor: "#fff",
-        tabBarIcon: <Icon name="question" size={22} color="#fff" />
-      }
-    },
+    StressTest: StressTestNavigator,
 
     CalmCloud: CalmCloudNavigator,
 
@@ -124,39 +132,6 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
   }
 );
 
-//Wrap the bottom tab navigator in a stack navigator to get splash screen working
-const MainNavigator = createStackNavigator(
-  {
-    BottomBarNavigator,
-    Splash: {
-      screen: Splash,
-      navigationOptions: {
-        tabBarVisible: false,
-        tabBarColor: "#6bccf3",
-        activeColor: "#6bccf3",
-        gesturesEnabled: false
-      }
-    },
-    // StressTest: {
-    //   screen: StressTest,
-    //   navigationOptions: {
-    //     tabBarVisible: false,
-    //     tabBarColor: '#6bccf3',
-    //     activeColor: '#6bccf3',
-    //   },
-    // },
-    DassResults: {
-      screen: DassResults,
-      navigationOptions: {
-        tabBarVisible: false,
-        tabBarColor: '#6bccf3',
-        activeColor: '#6bccf3',
-      },
-    },
-  },
-  { headerMode: "none", initialRouteName: "Splash", gesturesEnabled: false }
-);
-
-const App = createAppContainer(MainNavigator);
+const App = createAppContainer(BottomBarNavigator);
 
 export default App;

@@ -86,80 +86,54 @@ export default class ComplimentChat extends React.Component {
     }
   }
 
-  // THINGS FROM REACT NATIVE TO INCORPORATE
-  // Animated.spring()      // provides a simple spring physics model.
-  // Animated.timing()      // animates a value over time using easing functions.
-
-  // Animated.timing(
-  //   // Animate value over time
-  //   this.state.fadeAnim, // The value to drive
-  //   {
-  //     toValue: 1, // Animate to final value of 1
-  //   },
-  // ).start(); // Start the animation
-
 
 
 render() {
-  const isModalVisible = this.state.isModalVisible;
-  if (isModalVisible) {
-    modal = <ComplimentCard compliment={this.state.compliment} />
-  }
 
     return (
-      <View
-        style={ styles.view }>
+      <TouchableOpacity
+        onPress={() => {
+          this.getUpsyCompliment();
+          this.toggleModal();
+          this.animateUpsy();  // still working on this function
+        }} >
+        <View>
+          <View style={ styles.view }>
+            <View style={{height: 300, alignItems: 'center'}} >
+              <Text style={styles.subtitleText} >Tap the screen to get started</Text>
 
-        <View >
-          <Text style={styles.subtitleText} >Press on Upsy to get started</Text>
+              <View style={ styles.upsyImg }>
 
-        </View>
-        <View >
-          <TouchableOpacity
-            onPress={() => {
-              this.getUpsyCompliment();
-              this.toggleModal();
-              this.animateUpsy();  // working on this function
-            }}>
+                <Image
+                  style={ styles.upsyImg }
+                  source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
+                  resizeMode={'contain'} />
 
-            <Image
-              style={ styles.upsyImg }
-              source={require("../../assets/images/upsy_emo/upsy1_emo8.png")}
-              resizeMode={'contain'}
-            />
-
-          </TouchableOpacity>
-        </View>
-        
-        {/* MODAL START */}
-        <View >
-          <Modal 
-            style={ styles.background }
-
+              </View>
+            </View>
+          </View>
+          
+          {/* MODAL START */}
+            <Modal 
               isVisible={this.state.isModalVisible}
-
-              swipeDirection='right'
               animationIn='slideInUp'
               animationInTiming={500}
               animationOut='slideOutDown'
               animationOutTiming={750}
               backdropColor='#fff'
-              backdropOpacity={.5}
-
-            >
-            <View  style={ styles.modalSpacing } >
-              <Text style={styles.text} >
-                  {this.state.compliment}
-              </Text>
-              <Button title="Done" onPress={() => {
-                this.toggleModal()
-                this.animateUpsy()
-                }}/>
-            </View>
-          </Modal>
+              backdropOpacity={.5} >
+                <View  style={ styles.modalSpacing } >
+                  <Text style={styles.text} >
+                    {this.state.compliment}
+                  </Text>
+                  <Button title="Done" onPress={() => {
+                    this.toggleModal()
+                    this.animateUpsy()
+                    }} />
+                </View>
+            </Modal>
         </View>
-
-      </View>
+      </TouchableOpacity>
     )
   }
 }

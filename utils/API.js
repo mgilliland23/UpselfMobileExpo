@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 function getMessageAnalysis(message) {
-  console.log('making axios req');
+  console.log("making axios req");
   return axios
-    .post('/api/AnalyzeMessage', {
-      params: {userMessage: message},
+    .post("/api/AnalyzeMessage", {
+      params: { userMessage: message }
     })
     .then(
       response => {
@@ -12,15 +12,15 @@ function getMessageAnalysis(message) {
       },
       error => {
         console.log(error);
-      },
+      }
     );
 }
 
 function getMessageJaro(message) {
-  console.log('making api request...');
+  console.log("making api request...");
   return axios
-    .post('https://upself-web.herokuapp.com/api/jaroMessage', {
-      params: {userMessage: message},
+    .post("https://upself.io/api/jaroMessage", {
+      params: { userMessage: message }
     })
     .then(
       response => {
@@ -29,17 +29,17 @@ function getMessageJaro(message) {
       },
       error => {
         console.log(error);
-      },
+      }
     );
 }
 
 function getCompliment(message) {
-  console.log('making compliments api request...');
-  
+  console.log("making compliments api request...");
+
   // need to change the JSON that this function links to (copied from regular chat for the time being)
   return axios
-    .post('https://upself-web.herokuapp.com/api/jaroCompliment', {
-      params: {userMessage: message},
+    .post("https://upself.io/api/jaroCompliment", {
+      params: { userMessage: message }
     })
     .then(
       response => {
@@ -48,8 +48,8 @@ function getCompliment(message) {
       },
       error => {
         console.log(error);
-      },
+      }
     );
 }
 
-export default {getMessageAnalysis, getMessageJaro, getCompliment};
+export default { getMessageAnalysis, getMessageJaro, getCompliment };

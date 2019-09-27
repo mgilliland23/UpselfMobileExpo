@@ -1,93 +1,74 @@
 import React, { Component } from "react";
-import StressTextInput from "../../components/StressTextInput";
-import FadeInView from "../../components/FadeInView";
-import FloatingClouds from "../../components/FloatingClouds";
+//import "./Bounce_upsy.css";
 import {
+  StyleSheet,
   View,
-  ImageBackground,
-  Animated,
+  Text,
   Easing,
-  TouchableOpacity,
-  NativeModules,
+  TextInput,
   Keyboard,
-  Text
+  Dimensions,
+  Animated,
+  ImageBackground
 } from "react-native";
-
-import styles from "./style.js";
-
-//Make the react ImageBackground component an animatable component
+import StressTextInput from "../../components/StressTextInput";
+import { Button } from "react-native-paper";
+import FloatingClouds from "../../components/FloatingClouds";
 const AnimatedImage = Animated.createAnimatedComponent(ImageBackground);
+import styles from "./style.js";
+const win = Dimensions.get("window");
 
-export default class StressCloud extends Component {
+export default class CalmCloud extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     //Prop to hold the animation value of the stressballs height and width
     this.stressBallScaleValue = new Animated.Value(1);
     this.causeTextOpacity = new Animated.Value(1);
     this.instructionsTextOpacity = new Animated.Value(1);
+    this.topTextOpacity = new Animated.Value(1);
+
     this.instructionsArr = [
-      "Focus on the shrinking stress ball...",
+      "Now focus on your stress slowly shrinking...",
       "Take a deep breathe in...",
       "Now breathe out...",
       "Continue to focus on your breathing...",
       "Allow your body to relax...",
       "Allow your mind to relax...",
       "Focus on your stresses shrinking...",
-      "Watch as it disappears...",
       "Into nothing..."
     ];
 
     this.state = {
-      instructionText:
-        "Now tap the stress ball and watch your thought dissapear",
+      instructionText: "",
       instructionsPosition: 0,
       animationStarted: false
     };
   }
-
-  componentDidMount() {
-    //Add event listener for when the user presses the 'done' button on the keyboard
-    this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      this._keyboardDidHide
-    );
-  }
-
-  //Fade instructions in and out while the stressball is shrinking
-  animateInstructions = () => {
-    Animated.sequence([
-      //Fade the next instruction text back in,
-      Animated.timing(this.instructionsTextOpacity, {
-        toValue: 1,
-        delay: 1000,
-        duration: 1500,
-        useNativeDriver: true
-      }),
-      //Fade the instruction out
-      Animated.timing(this.instructionsTextOpacity, {
-        toValue: 0,
-        duration: 2500,
-        useNativeDriver: true
-      })
-    ]).start(() => {
-      //Set the instruction text state to the next instruction in the array
-      //this.state.instructionsPosition = this.state.instructionsPosition + 1;
-      this.setState({
-        instructionText: this.instructionsArr[this.state.instructionsPosition],
-        instructionsPosition: this.state.instructionsPosition + 1
-      });
-      //recursive call to animateInstructions as long as there are more instructions to dislay
-      if (this.state.instructionsPosition < 10) {
-        this.animateInstructions();
-      }
-    });
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#6bccf3"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
   };
+  componentDidMount() {
+    _isMounted = true;
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   handleStressBallAnimation = () => {
     //Set this state to start rendering the floating clouds
     this.setState({
       animationStarted: true
     });
+
+    this.fadeOutTopText();
     //Animate ball shrinking by decreasing the stressball's scale from 1 to 0 over 40sec
     Animated.timing(this.stressBallScaleValue, {
       toValue: 0,
@@ -116,62 +97,144 @@ export default class StressCloud extends Component {
     });
   };
 
-  render() {
-    const { navigation } = this.props;
-    const inputText = navigation.getParam("inputValue", "some default value");
-    console.log(inputText);
+  //Fade instructions in and out while the stressball is shrinking
+  animateInstructions = () => {
+    Animated.sequence([
+      //Fade the next instruction text back in,
+      Animated.timing(this.instructionsTextOpacity, {
+        toValue: 1,
+        delay: 1000,
+        duration: 1500,
+        useNativeDriver: true
+      }),
+      //Fade the instruction out
+      Animated.timing(this.instructionsTextOpacity, {
+        toValue: 0,
+        duration: 3500,
+        useNativeDriver: true
+      })
+    ]).start(() => {
+      //Set the instruction text state to the next instruction in the array
+      //this.state.instructionsPosition = this.state.instructionsPosition + 1;
+      console.log(this.instructionsArr[this.state.instructionsPosition]);
+      this.setState({
+        instructionText: this.instructionsArr[this.state.instructionsPosition],
+        instructionsPosition: this.state.instructionsPosition + 1
+      });
+      //recursive call to animateInstructions as long as there are more instructions to dislay
+      if (this.state.instructionsPosition < 9) {
+        this.animateInstructions();
+      }
+    });
+  };
 
-    // const startAnim = this.state.animationStarted;
-    // let clouds;
-    // if (startAnim) {
-    //   clouds = <FloatingClouds />;
-    // }
+  fadeOutTopText = () => {
+    //Animate text fading out
+    Animated.timing(this.topTextOpacity, {
+      toValue: 0,
+      duration: 200,
+      easing: Easing.ease,
+      useNativeDriver: true
+    }).start();
+  };
+
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { name, type, text } = event;
+
+    console.log("text input value: ", text);
+    // const name = event.target.name;
+
+    // Updating the input's state
+    this.setState({
+      inputValue: text
+    });
+  };
+
+  render() {
+    let topText = <Text style={styles.topText}></Text>;
+    let input = (
+      <TextInput
+        //{...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+        editable
+        value={this.state.inputValue}
+        name="firstName"
+        returnKeyType="done"
+        style={styles.textInput}
+        onSubmitEditing={Keyboard.dismiss}
+        multiline={true}
+        onChangeText={text => this.handleInputChange({ text })}
+      />
+    );
+    let goButton;
+    const inputText = this.state.inputValue;
+
+    if (inputText && inputText.length > 2) {
+      goButton = (
+        <Button
+          style={styles.button}
+          onPress={() => this.handleStressBallAnimation()}
+        >
+          Go!
+        </Button>
+      );
+    }
+    let animateText;
+
+    if (this.state.animationStarted) {
+      input = null;
+      goButton = null;
+      animateText = (
+        <AnimatedImage
+          style={[
+            styles.stressBall,
+            {
+              transform: [
+                {
+                  scaleX: this.stressBallScaleValue
+                },
+                {
+                  scaleY: this.stressBallScaleValue
+                }
+              ]
+            }
+          ]}
+          //source={require("../../assets/images/circle.png")}
+          resizeMode={"contain"}
+        >
+          <Text style={styles.stressText}>{this.state.inputValue}</Text>
+        </AnimatedImage>
+      );
+    }
 
     return (
       <View style={styles.background}>
         <FloatingClouds />
         <View style={styles.padding}>
-          <View style={styles.topPadding} />
-
-          <FadeInView style={styles.stressBallSection} duration={3500}>
-            <TouchableOpacity
-              onPress={() =>
-                !this.state.animationStarted && this.handleStressBallAnimation()
+          <Animated.Text
+            style={[
+              styles.topText,
+              {
+                opacity: this.topTextOpacity
               }
-            >
-              <AnimatedImage
-                style={[
-                  styles.stressBall,
-                  {
-                    transform: [
-                      {
-                        scaleX: this.stressBallScaleValue
-                      },
-                      {
-                        scaleY: this.stressBallScaleValue
-                      }
-                    ]
-                  }
-                ]}
-                source={require("../../assets/images/circle.png")}
-                resizeMode={"contain"}
-              >
-                <Text style={styles.stressText}>{inputText}</Text>
-              </AnimatedImage>
-            </TouchableOpacity>
-          </FadeInView>
-          <FadeInView style={styles.bottomText} duration={200}>
-            <Animated.Text
-              style={[
-                styles.getStartedText,
-                {
-                  opacity: this.instructionsTextOpacity
-                }
-              ]}
-            >
-              {this.state.instructionText}
-            </Animated.Text>
-          </FadeInView>
+            ]}
+          >
+            Tap the screen to type in something that is causing you stress
+          </Animated.Text>
+          {topText}
+          {input}
+          {animateText}
+          <Animated.Text
+            style={[
+              styles.bottomText,
+              {
+                opacity: this.instructionsTextOpacity
+              }
+            ]}
+          >
+            {this.state.instructionText}
+          </Animated.Text>
+          {goButton}
         </View>
       </View>
     );

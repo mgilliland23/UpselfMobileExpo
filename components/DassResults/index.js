@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignItems: "center",
     width: "100%",
+
   }
 });
 
@@ -62,51 +63,52 @@ export default class DassResults extends Component {
   // Depression Count
   calculateDepressionTotal = value => {
     if (value <= 9) {
-      return 'Normal';
+      return "Normal";
     } else if (value >= 10 && value <= 13) {
-      return 'Mild';
+      return "Mild";
     } else if (value >= 14 && value <= 20) {
-      return 'Moderate';
+      return "Moderate";
     } else if (value >= 21 && value <= 27) {
-      return 'Severe';
+      return "Severe";
     } else {
-      return 'Extremely Severe';
+      return "Extremely Severe";
     }
   };
 
   // Anxiety Count
   calculateAnxietyTotal = value => {
     if (value <= 7) {
-      return 'Normal';
+      return "Normal";
     } else if (value >= 8 && value <= 9) {
-      return 'Mild';
+      return "Mild";
     } else if (value >= 10 && value <= 14) {
-      return 'Moderate';
+      return "Moderate";
     } else if (value >= 15 && value <= 19) {
-      return 'Severe';
+      return "Severe";
     } else {
-      return 'Extremely Severe';
+      return "Extremely Severe";
     }
   };
 
   // Stress Count
   calculateStressTotal = value => {
     if (value <= 14) {
-      return 'Normal';
+      return "Normal";
     } else if (value >= 15 && value <= 18) {
-      return 'Mild';
+      return "Mild";
     } else if (value >= 19 && value <= 25) {
-      return 'Moderate';
+      return "Moderate";
     } else if (value >= 26 && value <= 33) {
-      return 'Severe';
+      return "Severe";
     } else {
-      return 'Extremely Severe';
+      return "Extremely Severe";
     }
   };
 
   allNormal = (dValue, aValue, sValue) => {
     if (dValue <= 9 && aValue <= 7 && sValue <= 14) {
       return 'Normal'
+
     }
   };
 
@@ -126,6 +128,7 @@ export default class DassResults extends Component {
 
       <View style={styles.background}>
 
+
         <View style={styles.padding}>
 
 
@@ -134,6 +137,7 @@ export default class DassResults extends Component {
             fontSize: 35
           }}>
             DAS test results
+
             </Text>
 
           <Text style={{
