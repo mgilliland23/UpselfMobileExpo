@@ -157,9 +157,9 @@ export default class DassResults extends Component {
             Anxiety Scale:
             {
               anxietyCount <= 9 ?
-                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateStressTotal(stressCount)} </Text>
+                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateAnxietyTotal(stressCount)} </Text>
                 :
-                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateStressTotal(stressCount)} </Text>
+                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateAnxietyTotal(stressCount)} </Text>
             }
 
             {"\n"}
@@ -183,10 +183,10 @@ export default class DassResults extends Component {
           }}>
             {
               stressCount <= 18 && anxietyCount <= 9 && depressionCount <= 13 ?
-                ("Well done! You are doing great.")
+                ("You are doing great. Go you!")
                 // ("Looks like we found something that we can improve! Click on the Upsy that can help you the most. You can also chat with Upsy.")
                 :
-                ("Looks like we found something that we can improve! Click on the Upsy that can help you the most.")
+                ("Looks like we can use some uplift! Click on the Upsy that can help you the most.")
             }
           </Text>
 
