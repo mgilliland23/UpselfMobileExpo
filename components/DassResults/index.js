@@ -157,9 +157,9 @@ export default class DassResults extends Component {
             Anxiety Scale:
             {
               anxietyCount <= 9 ?
-                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateAnxietyTotal(stressCount)} </Text>
+                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateAnxietyTotal(anxietyCount)} </Text>
                 :
-                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateAnxietyTotal(stressCount)} </Text>
+                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateAnxietyTotal(anxietyCount)} </Text>
             }
 
             {"\n"}
