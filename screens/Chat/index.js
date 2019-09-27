@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, View, Platform } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import API from "../../utils/API";
 
 import logo from "../../assets/images/check/check1.png";
@@ -83,6 +84,7 @@ export default class Chat extends React.Component {
 
   render() {
     return (
+      <View style={{flex: 1}}>
       <GiftedChat
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
@@ -90,6 +92,8 @@ export default class Chat extends React.Component {
           _id: 1
         }}
       />
+      {Platform.OS === 'android' ? <KeyboardSpacer /> : null }
+      </View>
     );
   }
 }
