@@ -64,9 +64,10 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     marginTop: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginLeft: 30,
+    marginBottom: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginLeft: 10,
     marginRight: 0,
     borderRadius: 10,
     // borderWidth: 2,
@@ -154,7 +155,8 @@ export default class DassResults extends Component {
 
 
           <Text style={{
-            flex: 0.1,
+            paddingTop: 30,
+            flex: 0.2,
             fontSize: 35
           }}>
             DASS Test Results
@@ -225,11 +227,11 @@ export default class DassResults extends Component {
 
             <View style={{
               flexDirection: 'row',
+              justifyContent: "center", aligntext: "center", alignItems: "center",
               flex: 0.2,
-              alignContent: "center",
             }}>
               <Image
-                style={{ width: 60 }}
+                style={{ width: 50, justifyContent: "center", aligntext: "center", alignItems: "center"}}
                 source={require('../../assets/images/menu_icons/arcade.png')}
                 resizeMode={"contain"}
               />
@@ -237,12 +239,11 @@ export default class DassResults extends Component {
 
             <View style={{
               flexDirection: 'row',
-              flex: 1.2,
-              width: "80%"
+              flex: 1.3, aligntext: "center", alignItems: "center"
             }}>
 
               <TouchableOpacity
-                style={[styles.buttons, { backgroundColor: "#6bccf3" }]}
+                style={[styles.buttons, { backgroundColor: "#6bccf3" , justifyContent: "center", aligntext: "center", alignItems: "center" }]}
                 onPress={() => this.props.navigation.navigate('Memory')} >
                 <Text style={styles.responseText}>for your Stress</Text>
               </TouchableOpacity>
@@ -263,10 +264,11 @@ export default class DassResults extends Component {
 
             <View style={{
               flexDirection: 'row',
-              flex: 0.2
+              justifyContent: "center", aligntext: "center", alignItems: "center",
+              flex: 0.2,
             }}>
               <Image
-                style={{ width: 60 }}
+                style={{ width: 50, justifyContent: "center", aligntext: "center", alignItems: "center"}}
                 source={require('../../assets/images/menu_icons/calmcloud.png')}
                 resizeMode={"contain"}
               />
@@ -274,12 +276,11 @@ export default class DassResults extends Component {
 
             <View style={{
               flexDirection: 'row',
-              flex: 1.2,
-              width: "80%"
+              flex: 1.3, aligntext: "center", alignItems: "center"
             }}>
 
               <TouchableOpacity
-                style={[styles.buttons, { backgroundColor: "#6bccf3" }]}
+                style={[styles.buttons, { backgroundColor: "#6bccf3", justifyContent: "center", aligntext: "center", alignItems: "center"  }]}
                 onPress={() => this.props.navigation.navigate('CalmCloud')} >
                 <Text style={styles.responseText}>for your Anxiety</Text>
               </TouchableOpacity>
@@ -294,16 +295,20 @@ export default class DassResults extends Component {
               flexDirection: 'row',
               aligntext: "center",
               alignItems: "center",
+              textAlign: "center",
+              maring: "auto",
+              justifyContent: "center",
               paddingRight: 5,
               paddingLeft: 5,
             }}>
 
             <View style={{
               flexDirection: 'row',
+              justifyContent: "center", aligntext: "center", alignItems: "center",
               flex: 0.2
             }}>
               <Image
-                style={{ width: 60 }}
+                style={{ width: 50, justifyContent: "center", aligntext: "center", alignItems: "center"}}
                 source={require('../../assets/images/menu_icons/compliments.png')}
                 resizeMode={"contain"}
               />
@@ -311,12 +316,12 @@ export default class DassResults extends Component {
 
             <View style={{
               flexDirection: 'row',
-              flex: 1.2,
-              width: "80%"
+              justifyContent: "center",
+              flex: 1.3, aligntext: "center", alignItems: "center"
             }}>
 
               <TouchableOpacity
-                style={[styles.buttons, { backgroundColor: "#6bccf3" }]}
+                style={[styles.buttons, { backgroundColor: "#6bccf3", justifyContent: "center", aligntext: "center", alignItems: "center" }]}
                 onPress={() => this.props.navigation.navigate('ComplimentChat')} >
                 <Text style={styles.responseText}> for your Depression</Text>
               </TouchableOpacity>
