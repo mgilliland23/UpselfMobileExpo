@@ -186,7 +186,7 @@ export default class DassResults extends Component {
                 ("You are doing great. Go you!")
                 // ("Looks like we found something that we can improve! Click on the Upsy that can help you the most. You can also chat with Upsy.")
                 :
-                ("Looks like we can use some uplift! Click on the Upsy that can help you the most.")
+                ("Looks like you can use some uplifting! Click on the Upsy that can help you the most.")
             }
           </Text>
 
