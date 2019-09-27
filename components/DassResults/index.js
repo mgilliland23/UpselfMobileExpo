@@ -56,7 +56,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
 
-  }
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    flex: 0.7
+  },
+  buttons: {
+    flex: 1,
+    marginTop: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginLeft: 30,
+    marginRight: 0,
+    borderRadius: 10,
+    // borderWidth: 2,
+    borderColor: '#fff',
+  },
+  responseText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });
 
 export default class DassResults extends Component {
@@ -152,7 +173,7 @@ export default class DassResults extends Component {
                 <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateDepressionTotal(depressionCount)} </Text>
             }
 
-            
+
             {"\n"}
             Anxiety Scale:
             {
@@ -177,7 +198,8 @@ export default class DassResults extends Component {
 
 
           <Text style={{
-            paddingTop: 60,
+            paddingTop: 30,
+            paddingBottom: 30,
             fontSize: 18,
             textAlign: "center"
           }}>
@@ -193,7 +215,7 @@ export default class DassResults extends Component {
 
           <View
             style={{
-              flex: 0.4,
+              flex: 0.15,
               flexDirection: 'row',
               aligntext: "center",
               alignItems: "center",
@@ -201,9 +223,110 @@ export default class DassResults extends Component {
               paddingLeft: 5,
             }}>
 
+            <View style={{
+              flexDirection: 'row',
+              flex: 0.2,
+              alignContent: "center",
+            }}>
+              <Image
+                style={{ width: 60 }}
+                source={require('../../assets/images/menu_icons/arcade.png')}
+                resizeMode={"contain"}
+              />
+            </View>
+
+            <View style={{
+              flexDirection: 'row',
+              flex: 1.2,
+              width: "80%"
+            }}>
+
+              <TouchableOpacity
+                style={[styles.buttons, { backgroundColor: "#6bccf3" }]}
+                onPress={() => this.props.navigation.navigate('Memory')} >
+                <Text style={styles.responseText}>for your Stress</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
 
 
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Memory')}
+          <View
+            style={{
+              flex: 0.15,
+              flexDirection: 'row',
+              aligntext: "center",
+              alignItems: "center",
+              paddingRight: 5,
+              paddingLeft: 5,
+            }}>
+
+            <View style={{
+              flexDirection: 'row',
+              flex: 0.2
+            }}>
+              <Image
+                style={{ width: 60 }}
+                source={require('../../assets/images/menu_icons/calmcloud.png')}
+                resizeMode={"contain"}
+              />
+            </View>
+
+            <View style={{
+              flexDirection: 'row',
+              flex: 1.2,
+              width: "80%"
+            }}>
+
+              <TouchableOpacity
+                style={[styles.buttons, { backgroundColor: "#6bccf3" }]}
+                onPress={() => this.props.navigation.navigate('CalmCloud')} >
+                <Text style={styles.responseText}>for your Anxiety</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+
+
+          <View
+            style={{
+              flex: 0.15,
+              flexDirection: 'row',
+              aligntext: "center",
+              alignItems: "center",
+              paddingRight: 5,
+              paddingLeft: 5,
+            }}>
+
+            <View style={{
+              flexDirection: 'row',
+              flex: 0.2
+            }}>
+              <Image
+                style={{ width: 60 }}
+                source={require('../../assets/images/menu_icons/compliments.png')}
+                resizeMode={"contain"}
+              />
+            </View>
+
+            <View style={{
+              flexDirection: 'row',
+              flex: 1.2,
+              width: "80%"
+            }}>
+
+              <TouchableOpacity
+                style={[styles.buttons, { backgroundColor: "#6bccf3" }]}
+                onPress={() => this.props.navigation.navigate('ComplimentChat')} >
+                <Text style={styles.responseText}> for your Depression</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+
+
+
+          {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Memory')}
               style={{
                 flex: 0.33,
                 textAlign: "center",
@@ -228,7 +351,7 @@ export default class DassResults extends Component {
                 Stress
                 </Text>
 
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
 
 
@@ -237,80 +360,80 @@ export default class DassResults extends Component {
 
 
 
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('CalmCloud')} 
-          style={{
-              flex: 0.33,
-              textAlign: "center",
-              alignItems: "center"
-            }}>
-                <Image
-              style={{ width: 75, flex: 0.33 }}
-              source={require('../../assets/images/menu_icons/calmcloud.png')}
-              resizeMode={"contain"}
-              onPress={() => this.props.navigation.navigate("Chat", {})}
-            />
+          {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('CalmCloud')}
+              style={{
+                flex: 0.33,
+                textAlign: "center",
+                alignItems: "center"
+              }}>
+              <Image
+                style={{ width: 75, flex: 0.33 }}
+                source={require('../../assets/images/menu_icons/calmcloud.png')}
+                resizeMode={"contain"}
+                onPress={() => this.props.navigation.navigate("Chat", {})}
+              />
 
-            <Text style={{
-              flex: 0.3,
-              textAlign: "center"
-            }}>
-              CalmCloud
+              <Text style={{
+                flex: 0.3,
+                textAlign: "center"
+              }}>
+                CalmCloud
                 {"\n"}
-              Great for
+                Great for
               {"\n"}
-              Anxiety
+                Anxiety
                 </Text>
 
-              </TouchableOpacity>
+            </TouchableOpacity> */}
 
 
 
 
 
+          {/* 
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('ComplimentChat')}
+              style={{
+                flex: 0.33,
+                textAlign: "center",
+                alignItems: "center"
+              }}>
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('ComplimentChat')}
-            style={{
-              flex: 0.33,
-              textAlign: "center",
-              alignItems: "center"
-            }}>
+              <Image
+                style={{ width: 75, flex: 0.33 }}
+                source={require('../../assets/images/menu_icons/compliments.png')}
+                resizeMode={"contain"}
+              />
 
-            <Image
-              style={{ width: 75, flex: 0.33 }}
-              source={require('../../assets/images/menu_icons/compliments.png')}
-              resizeMode={"contain"}
-            />
-
-            <Text style={{
-              flex: 0.3,
-              textAlign: "center"
-            }}>
-              Compliments
+              <Text style={{
+                flex: 0.3,
+                textAlign: "center"
+              }}>
+                Compliments
                 {"\n"}
-              Great for
+                Great for
               {"\n"}
-              depression
+                depression
                 </Text>
 
-          </TouchableOpacity>
+            </TouchableOpacity> */}
 
 
+
+
+
+
+          <Button
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate("Chat", {})}
+          >
+            Go chat with Upsy!
+          </Button>
 
 
         </View>
 
-        <Button
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate("Chat", {})}
-        >
-          Go chat with Upsy!
-          </Button>
+      </View >
 
-
-      </View>
-    
-      </View > 
-
-      )
+    )
   }
 }
