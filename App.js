@@ -27,10 +27,6 @@ console.disableYellowBox = true;
 
 const CalmCloudNavigator = createStackNavigator(
   {
-    // StressInputPage: {
-    //   screen: StressInputPage,
-    //   gesturesEnabled: false
-    // },
     CalmCloud: {
       screen: CalmCloud,
       gesturesEnabled: false
@@ -61,12 +57,12 @@ const StressTestNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "DassResults",
+    initialRouteName: "StressTest",
     navigationOptions: {
-      tabBarLabel: "Calm Cloud",
+      tabBarLabel: "DAS Test",
       tabBarColor: "#6d8bf4",
       activeColor: "#fff",
-      tabBarIcon: <EnIcon name="test" size={22} color="#fff" />
+      tabBarIcon: <EnIcon name="new-message" size={22} color="#fff" />
     }
   }
 );
@@ -90,7 +86,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarLabel: "Arcade",
         tabBarColor: "#936df4",
         activeColor: "#fff",
-        tabBarIcon: <EnIcon name="star" size={22} color="#fff" />
+        tabBarIcon: <EnIcon name="game-controller" size={22} color="#fff" />
       }
     },
 
@@ -98,7 +94,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       screen: ComplimentChat,
 
       navigationOptions: {
-        tabBarLabel: "Compliment",
+        tabBarLabel: "Love",
         tabBarColor: "#FF5733",
         activeColor: "#fff",
         tabBarIcon: <EnIcon name="heart" size={22} color="#fff" />
