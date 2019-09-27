@@ -136,7 +136,7 @@ export default class DassResults extends Component {
             flex: 0.1,
             fontSize: 35
           }}>
-            DAS Test Results
+            DASS Test Results
 
             </Text>
 
