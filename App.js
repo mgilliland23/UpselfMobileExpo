@@ -59,8 +59,8 @@ const StressTestNavigator = createStackNavigator(
     headerMode: "none",
     initialRouteName: "StressTest",
     navigationOptions: {
-      tabBarLabel: "DAS Test",
-      tabBarColor: "#6d8bf4",
+      tabBarLabel: "DASS Test",
+      tabBarColor: "#f46da1",
       activeColor: "#fff",
       tabBarIcon: <EnIcon name="new-message" size={22} color="#fff" />
     }
@@ -80,15 +80,8 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: <EnIcon name="chat" size={22} color="#fff" />
       }
     },
-    Memory: {
-      screen: Memory,
-      navigationOptions: {
-        tabBarLabel: "Arcade",
-        tabBarColor: "#936df4",
-        activeColor: "#fff",
-        tabBarIcon: <EnIcon name="game-controller" size={22} color="#fff" />
-      }
-    },
+
+    CalmCloud: CalmCloudNavigator,
 
     ComplimentChat: {
       screen: ComplimentChat,
@@ -101,9 +94,19 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       }
     },
 
+    Memory: {
+      screen: Memory,
+      navigationOptions: {
+        tabBarLabel: "Arcade",
+        tabBarColor: "#936df4",
+        activeColor: "#fff",
+        tabBarIcon: <EnIcon name="game-controller" size={22} color="#fff" />
+      }
+    },
+
+
     StressTest: StressTestNavigator,
 
-    CalmCloud: CalmCloudNavigator,
 
     Menu: {
       screen: Menu,
