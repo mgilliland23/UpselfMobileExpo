@@ -156,6 +156,7 @@ export default class DassResults extends Component {
 
           <Text style={{
             paddingTop: 30,
+            paddingBottom: 10,
             flex: 0.2,
             fontSize: 35
           }}>
@@ -217,7 +218,7 @@ export default class DassResults extends Component {
 
           <View
             style={{
-              flex: 0.15,
+              flex: 0.17,
               flexDirection: 'row',
               aligntext: "center",
               alignItems: "center",
@@ -254,7 +255,7 @@ export default class DassResults extends Component {
 
           <View
             style={{
-              flex: 0.15,
+              flex: 0.17,
               flexDirection: 'row',
               aligntext: "center",
               alignItems: "center",
@@ -291,7 +292,7 @@ export default class DassResults extends Component {
 
           <View
             style={{
-              flex: 0.15,
+              flex: 0.17,
               flexDirection: 'row',
               aligntext: "center",
               alignItems: "center",
