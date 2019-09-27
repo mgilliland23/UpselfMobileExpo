@@ -179,108 +179,112 @@ export default class DassResults extends Component {
             }}>
 
 
-            <View style={{
+
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Memory')}
+              style={{
+                flex: 0.33,
+                textAlign: "center",
+                alignItems: "center"
+              }}>
+              <Image
+                style={{ width: 75, flex: 0.33 }}
+                source={require('../../assets/images/menu_icons/arcade.png')}
+                resizeMode={"contain"}
+              />
+
+
+
+              <Text style={{
+                flex: 0.3,
+                textAlign: "center"
+              }}>
+                Arcade
+                {"\n"}
+                Great for
+                {"\n"}
+                Stress
+                </Text>
+
+            </TouchableOpacity>
+
+
+
+
+
+
+
+
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('CalmCloud')} 
+          style={{
               flex: 0.33,
               textAlign: "center",
               alignItems: "center"
             }}>
-
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Memory')}>
                 <Image
-                  style={{ width: 75, flex: 0.33 }}
-                  source={require('../../assets/images/menu_icons/arcade.png')}
-                  resizeMode={"contain"}
-                />
-
-
-
-                <Text style={{
-                  flex: 0.3,
-                  textAlign: "center"
-                }}>
-                  Arcade
-                {"\n"}
-                  Great for Stress
-                </Text>
-
-              </TouchableOpacity>
-            </View>
-
-
-
-
-
-
-            <View style={{
-              flex: 0.33,
-              textAlign: "center",
-              alignItems: "center"
-            }}>
-
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('CalmCloud')}>
-                <Image
-                  style={{ width: 75, flex: 0.33 }}
-                  source={require('../../assets/images/menu_icons/calmcloud.png')}
-                  resizeMode={"contain"}
-                  onPress={() => this.props.navigation.navigate("Chat", {})}
-                />
-
-                <Text style={{
-                  flex: 0.3,
-                  textAlign: "center"
-                }}>
-                  CalmCloud
-                {"\n"}
-                  Great for Anxiety
-                </Text>
-
-              </TouchableOpacity>
-            </View>
-
-
-
-
-
-            <View style={{
-              flex: 0.33,
-              textAlign: "center",
-              alignItems: "center"
-            }}>
-
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ComplimentChat')}>
-
-                <Image
-                  style={{ width: 75, flex: 0.33 }}
-                  source={require('../../assets/images/menu_icons/compliments.png')}
-                  resizeMode={"contain"}
-                />
-
-                <Text style={{
-                  flex: 0.3,
-                  textAlign: "center"
-                }}>
-                  Compliments
-                {"\n"}
-                  Great for depression
-                </Text>
-
-              </TouchableOpacity>
-
-            </View>
-
-
-
-          </View>
-
-          <Button
-              style={styles.button}
+              style={{ width: 75, flex: 0.33 }}
+              source={require('../../assets/images/menu_icons/calmcloud.png')}
+              resizeMode={"contain"}
               onPress={() => this.props.navigation.navigate("Chat", {})}
-            >
-              Go chat with Upsy!
-          </Button>
-              
+            />
+
+            <Text style={{
+              flex: 0.3,
+              textAlign: "center"
+            }}>
+              CalmCloud
+                {"\n"}
+              Great for
+              {"\n"}
+              Anxiety
+                </Text>
+
+              </TouchableOpacity>
+
+
+
+
+
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ComplimentChat')}
+            style={{
+              flex: 0.33,
+              textAlign: "center",
+              alignItems: "center"
+            }}>
+
+            <Image
+              style={{ width: 75, flex: 0.33 }}
+              source={require('../../assets/images/menu_icons/compliments.png')}
+              resizeMode={"contain"}
+            />
+
+            <Text style={{
+              flex: 0.3,
+              textAlign: "center"
+            }}>
+              Compliments
+                {"\n"}
+              Great for
+              {"\n"}
+              depression
+                </Text>
+
+          </TouchableOpacity>
+
+
+
 
         </View>
+
+        <Button
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate("Chat", {})}
+        >
+          Go chat with Upsy!
+          </Button>
+
+
+      </View>
     
       </View > 
 
