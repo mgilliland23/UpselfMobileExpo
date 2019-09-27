@@ -10,10 +10,8 @@ import React, { Fragment, Component } from "react";
 import Chat from "./screens/Chat";
 import CalmCloud from "./screens/CalmCloud";
 import Menu from "./screens/Menu";
-import StressInputPage from "./screens/CalmCloud";
 import Memory from "./screens/Memory";
 import ComplimentChat from "./screens/ComplimentChat";
-import Splash from "./screens/SplashScreen";
 import StressTest from "./screens/StressTest";
 import DassResults from "./components/DassResults";
 import { createAppContainer } from "react-navigation";
@@ -46,6 +44,29 @@ const CalmCloudNavigator = createStackNavigator(
       tabBarColor: "#6d8bf4",
       activeColor: "#fff",
       tabBarIcon: <EnIcon name="cloud" size={22} color="#fff" />
+    }
+  }
+);
+
+const StressTestNavigator = createStackNavigator(
+  {
+    StressTest: {
+      screen: StressTest,
+      gesturesEnabled: false
+    },
+    DassResults: {
+      screen: DassResults,
+      gesturesEnabled: false
+    }
+  },
+  {
+    headerMode: "none",
+    initialRouteName: "DassResults",
+    navigationOptions: {
+      tabBarLabel: "Calm Cloud",
+      tabBarColor: "#6d8bf4",
+      activeColor: "#fff",
+      tabBarIcon: <EnIcon name="test" size={22} color="#fff" />
     }
   }
 );
@@ -84,16 +105,7 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
       }
     },
 
-    StressTest: {
-      screen: StressTest,
-
-      navigationOptions: {
-        tabBarLabel: "StressTest",
-        tabBarColor: "#f46d8b",
-        activeColor: "#fff",
-        tabBarIcon: <Icon name="question" size={22} color="#fff" />
-      }
-    },
+    StressTest: StressTestNavigator,
 
     CalmCloud: CalmCloudNavigator,
 
@@ -119,30 +131,6 @@ const BottomBarNavigator = createMaterialBottomTabNavigator(
     keyboardHidesNavigationBar: false
   }
 );
-
-//Wrap the bottom tab navigator in a stack navigator to get splash screen working
-
-// const MainNavigator = createStackNavigator(
-//   {
-//     BottomBarNavigator,
-//     // Splash: {
-//     //   screen: Splash,
-//     //   navigationOptions: {
-//     //     tabBarVisible: false,
-//     //     tabBarColor: "#6bccf3",
-//     //     activeColor: "#6bccf3",
-//     //     gesturesEnabled: false
-//     //   }
-//     // },
-
-//   },
-//   {
-//     headerMode: "none",
-//     initialRouteName: "BottomBarNavigator",
-//     gesturesEnabled: false
-//   }
-// );
-
 
 const App = createAppContainer(BottomBarNavigator);
 
