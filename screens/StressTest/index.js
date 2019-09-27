@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+
 import {
   StyleSheet,
   View,
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center"
   },
-  question: { fontSize: 20, textAlign: "center" }
+  question: { fontSize: 20, textAlign: 'center' },
+
 });
 
 export default class StressTest extends Component {
@@ -153,6 +155,10 @@ export default class StressTest extends Component {
     );
   }
 
+
+
+
+
   // Function to reset all states
   resetStates = () => {
     this.setState({
@@ -164,6 +170,9 @@ export default class StressTest extends Component {
       buttonCol: ["#6bccf3", "#936df4", "#6d8bf4", "#6de5f4"]
     });
   };
+
+
+
 
   // Calculate results
   getResults = () => {
@@ -182,14 +191,19 @@ export default class StressTest extends Component {
     });
   };
 
+
+
+  
+
   render() {
     // console.log(dassQuestions[this.state.questionIndex].question);
     console.log(Object.keys(dassQuestions).length);
 
     return (
       <View style={styles.background}>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+
             <ImageBackground
               style={styles.logo}
               source={require("../../assets/images/stresstest/upsyDABss.png")}
@@ -218,9 +232,8 @@ export default class StressTest extends Component {
           </View>
         </View>
         <View />
-        <View
-          style={{ flex: 1, justifyContent: "center", marginBottom: "10%" }}
-        >
+        <View style={{ flex: 1, justifyContent: 'center', marginBottom: '10%' }}>
+
           <View>
             <DassResponse
               buttonCol={this.state.buttonCol[0]}

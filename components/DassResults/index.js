@@ -1,25 +1,61 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   Text,
-  ImageBackground,
+  Image,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
-} from "react-native";
+  Dimensions,
+} from 'react-native';
+import { Button } from "react-native-paper";
 
-const win = Dimensions.get("window");
+const win = Dimensions.get('window');
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   background: {
     flex: 1,
-    width: win.width
-    // padding: 1,
+    width: win.width,
+    //height: win.height,
+    padding: 1,
+    //alignSelf: 'flex-start',
+    backgroundColor: "#f2f2f2"
   },
-  upsyImg: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
+  padding: {
+    flex: 1,
+    paddingHorizontal: 24,
+    alignItems: "center",
     justifyContent: "center"
+  },
+  aligntext: {
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  textInput: {
+    flex: 1
+  },
+  button: {
+    marginTop: 50,
+    // marginBottom: 50
+  },
+  text: {
+    marginTop: 0,
+    marginBottom: 0,
+    fontSize: 18,
+    textAlign: "center"
+  },
+  textInput: {
+    color: "black",
+    alignSelf: "center",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 18,
+    alignItems: "center",
+    width: "100%",
+
   }
 });
 
@@ -71,258 +107,183 @@ export default class DassResults extends Component {
 
   allNormal = (dValue, aValue, sValue) => {
     if (dValue <= 9 && aValue <= 7 && sValue <= 14) {
-      return "Normal";
+      return 'Normal'
+
     }
   };
 
   render() {
     const { navigation } = this.props;
-    const depressionCount = navigation.getParam("depressionCount", 0);
-    const anxietyCount = navigation.getParam("anxietyCount", 0);
-    const stressCount = navigation.getParam("stressCount", 0);
+    const depressionCount = navigation.getParam('depressionCount', 0);
+    const anxietyCount = navigation.getParam('anxietyCount', 0);
+    const stressCount = navigation.getParam('stressCount', 0);
 
     console.info(depressionCount);
     console.info(anxietyCount);
     console.info(stressCount);
 
+
     return (
+
+
       <View style={styles.background}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "column"
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                flex: 1,
-                marginTop: 40,
-                textAlign: "center",
-                fontSize: 40
-              }}
-            >
-              DASS-21 RESULTS
+
+
+        <View style={styles.padding}>
+
+
+          <Text style={{
+            flex: 0.1,
+            fontSize: 35
+          }}>
+            DAS test results
+
             </Text>
-          </View>
+
+          <Text style={{
+            fontSize: 18
+          }}>
+            Depression Scale: {this.calculateDepressionTotal(depressionCount)}
+            {"\n"}
+            Anxiety Scale: {this.calculateAnxietyTotal(anxietyCount)}
+            {"\n"}
+            Stress Scale: {this.calculateStressTotal(stressCount)}
+          </Text>
+
+
+
+
+          <Text style={{
+            paddingTop: 60,
+            fontSize: 18,
+            textAlign: "center"
+          }}>
+            {
+              stressCount <= 18 && anxietyCount <= 9 && depressionCount <= 13 ?
+                ("Well done! You are doing great.")
+                // ("Looks like we found something that we can improve! Click on the Upsy that can help you the most. You can also chat with Upsy.")
+                :
+                ("Looks like we found something that we can improve! Click on the Upsy that can help you the most.")
+            }
+          </Text>
+
+
           <View
             style={{
-              flex: 2,
-              //   backgroundColor: '#6DCEF470',
-              marginTop: 30
-            }}
-          >
-            <View style={{ marginTop: 10 }}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 25,
-                  fontWeight: "bold"
-                }}
-              >
-                Depression Scale:{" "}
-                {this.calculateDepressionTotal(depressionCount)}
-              </Text>
-            </View>
-            {this.calculateDepressionTotal(depressionCount) === "Severe" && (
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Chat")}
-              >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontSize: 17,
-                    fontStyle: "italic"
-                  }}
-                >
-                  Talk about it with Upsy
-                </Text>
-                <ImageBackground
-                  style={styles.upsyImg}
-                  source={require("../../assets/images/menu_icons/chat.png")}
+              flex: 0.4,
+              flexDirection: 'row',
+              aligntext: "center",
+              alignItems: "center",
+              paddingRight: 5,
+              paddingLeft: 5,
+            }}>
+
+
+            <View style={{
+              flex: 0.33,
+              textAlign: "center",
+              alignItems: "center"
+            }}>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Memory')}>
+                <Image
+                  style={{ width: 75, flex: 0.33 }}
+                  source={require('../../assets/images/menu_icons/arcade.png')}
                   resizeMode={"contain"}
                 />
-              </TouchableOpacity>
-            )}
-            {this.calculateDepressionTotal(depressionCount) ===
-              "Extremely Severe" && (
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Chat")}
-              >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontSize: 17,
-                    fontStyle: "italic"
-                  }}
-                >
-                  Talk about it with Upsy
+
+
+
+                <Text style={{
+                  flex: 0.3,
+                  textAlign: "center"
+                }}>
+                  Arcade
+                {"\n"}
+                  Great for Stress
                 </Text>
-                <ImageBackground
-                  style={styles.upsyImg}
-                  source={require("../../assets/images/menu_icons/chat.png")}
-                  resizeMode={"contain"}
-                />
-              </TouchableOpacity>
-            )}
-          </View>
-          <View
-            style={{
-              flex: 2
-              //   backgroundColor: '#6DCEF440',
-            }}
-          >
-            <View style={{ marginTop: 10 }}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 25,
-                  fontWeight: "bold"
-                }}
-              >
-                Anxiety Scale: {this.calculateAnxietyTotal(anxietyCount)}
-              </Text>
-            </View>
-            {this.calculateAnxietyTotal(anxietyCount) === "Severe" && (
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("CalmCloud")}
-              >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    fontSize: 17,
-                    fontStyle: "italic"
-                  }}
-                >
-                  Check out our CalmCloud Exercise
-                </Text>
-                <ImageBackground
-                  style={styles.upsyImg}
-                  source={require("../../assets/images/menu_icons/calmcloud.png")}
-                  resizeMode={"contain"}
-                />
-              </TouchableOpacity>
-            )}
-            {this.calculateAnxietyTotal(anxietyCount) ===
-              "Extremely Severe" && (
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("CalmCloud")}
-              >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    fontSize: 17,
-                    fontStyle: "italic"
-                  }}
-                >
-                  Check out our CalmCloud Exercise
-                </Text>
-                <ImageBackground
-                  style={styles.upsyImg}
-                  source={require("../../assets/images/menu_icons/calmcloud.png")}
-                  resizeMode={"contain"}
-                />
-              </TouchableOpacity>
-            )}
-          </View>
-          <View
-            style={{
-              flex: 2
-              //   backgroundColor: '#6DCEF430',
-            }}
-          >
-            <View style={{ marginTop: 10 }}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 25,
-                  fontWeight: "bold"
-                }}
-              >
-                Stress Scale: {this.calculateStressTotal(stressCount)}
-              </Text>
-            </View>
-            {this.calculateStressTotal(stressCount) === "Severe" && (
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Memory")}
-              >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    fontSize: 17,
-                    fontStyle: "italic"
-                  }}
-                >
-                  Enter the Arcade Room!
-                </Text>
-                <ImageBackground
-                  style={styles.upsyImg}
-                  source={require("../../assets/images/menu_icons/arcade.png")}
-                  resizeMode={"contain"}
-                />
-              </TouchableOpacity>
-            )}
-            {this.calculateStressTotal(stressCount) === "Extremely Severe" && (
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Memory")}
-              >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    marginTop: 5,
-                    fontSize: 17,
-                    fontStyle: "italic"
-                  }}
-                >
-                  Enter the Arcade Room!
-                </Text>
-                <ImageBackground
-                  style={styles.upsyImg}
-                  source={require("../../assets/images/menu_icons/arcade.png")}
-                  resizeMode={"contain"}
-                />
-              </TouchableOpacity>
-            )}
-          </View>
-          <View style={{ flex: 1, justifyContent: "center" }}>
-            {this.allNormal(depressionCount, anxietyCount, stressCount) ===
-              "Normal" && (
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  fontStyle: "italic",
-                  marginBottom: 10
-                }}
-              >
-                You seem to be doing just fine, yay!
-              </Text>
-            )}
-            <View>
-              <TouchableOpacity
-                style={{
-                  marginLeft: 150,
-                  marginRight: 150
-                }}
-                onPress={() => this.props.navigation.navigate("Menu")}
-              >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    textAlign: "center"
-                  }}
-                >
-                  OK
-                </Text>
+
               </TouchableOpacity>
             </View>
+
+
+
+
+
+
+            <View style={{
+              flex: 0.33,
+              textAlign: "center",
+              alignItems: "center"
+            }}>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('CalmCloud')}>
+                <Image
+                  style={{ width: 75, flex: 0.33 }}
+                  source={require('../../assets/images/menu_icons/calmcloud.png')}
+                  resizeMode={"contain"}
+                  onPress={() => this.props.navigation.navigate("Chat", {})}
+                />
+
+                <Text style={{
+                  flex: 0.3,
+                  textAlign: "center"
+                }}>
+                  CalmCloud
+                {"\n"}
+                  Great for Anxiety
+                </Text>
+
+              </TouchableOpacity>
+            </View>
+
+
+
+
+
+            <View style={{
+              flex: 0.33,
+              textAlign: "center",
+              alignItems: "center"
+            }}>
+
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('ComplimentChat')}>
+
+                <Image
+                  style={{ width: 75, flex: 0.33 }}
+                  source={require('../../assets/images/menu_icons/compliments.png')}
+                  resizeMode={"contain"}
+                />
+
+                <Text style={{
+                  flex: 0.3,
+                  textAlign: "center"
+                }}>
+                  Compliments
+                {"\n"}
+                  Great for depression
+                </Text>
+
+              </TouchableOpacity>
+
+            </View>
+
+
+
           </View>
+
+          <Button
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("Chat", {})}
+            >
+              Go chat with Upsy!
+          </Button>
+              
+
         </View>
-      </View>
-    );
+    
+      </View > 
+
+      )
   }
 }
