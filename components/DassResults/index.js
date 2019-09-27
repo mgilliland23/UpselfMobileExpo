@@ -143,11 +143,34 @@ export default class DassResults extends Component {
           <Text style={{
             fontSize: 18
           }}>
-            Depression Scale: {this.calculateDepressionTotal(depressionCount)}
+            Depression Scale:
+
+            {
+              depressionCount <= 13 ?
+                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateDepressionTotal(depressionCount)} </Text>
+                :
+                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateDepressionTotal(depressionCount)} </Text>
+            }
+
+            
             {"\n"}
-            Anxiety Scale: {this.calculateAnxietyTotal(anxietyCount)}
+            Anxiety Scale:
+            {
+              anxietyCount <= 9 ?
+                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateStressTotal(stressCount)} </Text>
+                :
+                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateStressTotal(stressCount)} </Text>
+            }
+
             {"\n"}
-            Stress Scale: {this.calculateStressTotal(stressCount)}
+            Stress Scale:
+            {
+              stressCount <= 18 ?
+                <Text style={{ color: 'green', fontWeight: "bold" }}> {this.calculateStressTotal(stressCount)} </Text>
+                :
+                <Text style={{ color: 'orange', fontWeight: "bold" }}> {this.calculateStressTotal(stressCount)} </Text>
+            }
+
           </Text>
 
 
