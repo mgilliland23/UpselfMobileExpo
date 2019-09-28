@@ -42,6 +42,23 @@ export default class Chat extends React.Component {
   //Get a response from upsy using the upself web API
   getUpsyResponse = () => {
     console.log(this.state.messages[0]);
+
+    let typingMessage = {
+      _id: Math.round(Math.random() * 1000000),
+          text: "Upsy is typing...",
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "Upsy",
+            avatar: logo
+          }
+    }
+    console.log(typingMessage)
+
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, typingMessage)
+    }));
+
     //Pass the user's message to the upself API and append Upsy's response to the chat
     API.getMessageJaro(this.state.messages[0].text).then(
       function(response) {
