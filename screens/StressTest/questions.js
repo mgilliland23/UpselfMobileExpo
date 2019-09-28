@@ -46,7 +46,7 @@ const dassQuestions = [
     das: 's',
   },
   {
-    question: 'I found it difficult to relax',
+    question: 'I find it difficult to relax',
     das: 's',
   },
   {
