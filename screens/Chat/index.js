@@ -47,10 +47,8 @@ export default class Chat extends React.Component {
     if (this.state.isTyping) {
       // if (this.typingTimeoutTimer == null) {
       //   this.startTimer();
-      // }
-      
+      // }  
       return <TypingIndicator />;
-     
     } 
   return null;
 };
@@ -95,12 +93,12 @@ export default class Chat extends React.Component {
       // }
       // typing().bind(this);
       
+      
       if (!this.state.isTyping) {
         this.setState(previousState => ({
           messages: GiftedChat.append(previousState.messages, upsyMessage)  
         }));
       }
-      
 
         //Bind this to maintain proper scop for setState
       }.bind(this)
