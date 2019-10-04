@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, KeyboardAvoidingView, View, Platform } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { StyleSheet, KeyboardAvoidingView, View, Platform, Text } from "react-native";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import API from "../../utils/API";
+import TypingIndicator from "../../components/TypingIndicator"
 
 import logo from "../../assets/images/check/check1.png";
 
@@ -18,7 +19,8 @@ export default class Chat extends React.Component {
   }
 
   state = {
-    messages: []
+    messages: [],
+    isTyping: false,
   };
 
   //Set initial state for when chat is first started
@@ -39,6 +41,21 @@ export default class Chat extends React.Component {
     });
   }
 
+  // render footer
+
+  renderChatFooter = () => {
+    if (this.state.isTyping) {
+      // if (this.typingTimeoutTimer == null) {
+      //   this.startTimer();
+      // }
+      
+      return <TypingIndicator />;
+     
+    } 
+  return null;
+};
+
+
   //Get a response from upsy using the upself web API
   getUpsyResponse = () => {
     console.log(this.state.messages[0]);
@@ -55,15 +72,9 @@ export default class Chat extends React.Component {
     }
     console.log(typingMessage)
 
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, typingMessage)
-    }));
-
     //Pass the user's message to the upself API and append Upsy's response to the chat
     API.getMessageJaro(this.state.messages[0].text).then(
       function(response) {
-        //Create message object containg the response from the API.
-        //This is the object that the Gifted Chat component expects
         let upsyMessage = {
           _id: Math.round(Math.random() * 1000000),
           text: response,
@@ -73,13 +84,24 @@ export default class Chat extends React.Component {
             name: "Upsy",
             avatar: logo
           }
-          // Any additional custom parameters are passed through
         };
         console.log(upsyMessage);
-        //Append Upsy's message to the chat
+
+      // this.setState({isTyping: true})
+      
+      // async function typing() {  
+      //   await new Promise ((resolve, reject) => setTimeout(resolve, 1000))
+      //   this.setState({isTyping: false})
+      // }
+      // typing().bind(this);
+      
+      if (!this.state.isTyping) {
         this.setState(previousState => ({
-          messages: GiftedChat.append(previousState.messages, upsyMessage)
+          messages: GiftedChat.append(previousState.messages, upsyMessage)  
         }));
+      }
+      
+
         //Bind this to maintain proper scop for setState
       }.bind(this)
     );
@@ -99,12 +121,14 @@ export default class Chat extends React.Component {
     );
   }
 
+
   render() {
     return (
       <View style={{flex: 1}}>
       <GiftedChat
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
+        renderChatFooter={this.renderChatFooter}
         user={{
           _id: 1
         }}
