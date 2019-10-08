@@ -48,10 +48,18 @@ export default class Chat extends React.Component {
       // if (this.typingTimeoutTimer == null) {
       //   this.startTimer();
       // }  
+      
       return <TypingIndicator />;
     } 
-  return null;
-};
+    return null;
+  };
+
+  endTyping = (upsyMessage) => {
+    this.setState({ isTyping: false });
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, upsyMessage)  
+    }));
+  }
 
 
   //Get a response from upsy using the upself web API
@@ -85,7 +93,10 @@ export default class Chat extends React.Component {
         };
         console.log(upsyMessage);
 
-      // this.setState({isTyping: true})
+        this.setState({isTyping: true})
+
+        setTimeout(() => {this.endTyping(upsyMessage)}, 1000)
+      
       
       // async function typing() {  
       //   await new Promise ((resolve, reject) => setTimeout(resolve, 1000))
@@ -94,11 +105,11 @@ export default class Chat extends React.Component {
       // typing().bind(this);
       
       
-      if (!this.state.isTyping) {
-        this.setState(previousState => ({
-          messages: GiftedChat.append(previousState.messages, upsyMessage)  
-        }));
-      }
+      // if (!this.state.isTyping) {
+        // this.setState(previousState => ({
+        //   messages: GiftedChat.append(previousState.messages, upsyMessage)  
+        // }));
+      // }
 
         //Bind this to maintain proper scop for setState
       }.bind(this)
@@ -113,6 +124,8 @@ export default class Chat extends React.Component {
         messages: GiftedChat.append(previousState.messages, messages)
       }),
       () => {
+        // typing indicator
+        this.setState({ isTyping: true })
         //Get response from Upsy
         this.getUpsyResponse();
       }
